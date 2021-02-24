@@ -96,7 +96,7 @@ namespace Cv1 {
 
       private static string CheckPersonalNumber(string number) {
          var regexForMale = new Regex(@"^\d{2}(0[1-9]|1[0-2])\d{2}\/\d{4}$");
-         var regexForFemale = new Regex(@"^\d{2}(5[1-9]|6[0-2])\d{2}\/\d{4}$");
+         var regexForFemale = new Regex(@"^\d{2}(5[1-9]|6[0-2])\d{2}\/?\d{4}$");
          return regexForMale.IsMatch(number) ? "male" : regexForFemale.IsMatch(number) ? "female" : "wrong format";
       }
    }
