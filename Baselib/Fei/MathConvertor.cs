@@ -77,23 +77,23 @@ namespace Fei {
          return arabic;
       }
 
-      public static string DecimalToRoman(int number) {
+      public static string ArabicDecimalToRoman(int number) {
          if ((number < 0) || (number > 3999))
             throw new ArgumentOutOfRangeException("Insert value betwheen 1 and 3999!");
          if (number < 1) return string.Empty;
-         if (number >= 1000) return Thousand + DecimalToRoman(number - 1000);
-         if (number >= 900) return "CM" + DecimalToRoman(number - 900);
-         if (number >= 500) return FiveHundred + DecimalToRoman(number - 500);
-         if (number >= 400) return "CD" + DecimalToRoman(number - 400);
-         if (number >= 100) return Hundred + DecimalToRoman(number - 100);
-         if (number >= 90) return "XC" + DecimalToRoman(number - 90);
-         if (number >= 50) return Fifty + DecimalToRoman(number - 50);
-         if (number >= 40) return "XL" + DecimalToRoman(number - 40);
-         if (number >= 10) return Ten + DecimalToRoman(number - 10);
-         if (number >= 9) return "IX" + DecimalToRoman(number - 9);
-         if (number >= 5) return Five + DecimalToRoman(number - 5);
-         if (number >= 4) return "IV" + DecimalToRoman(number - 4);
-         return One + DecimalToRoman(number - 1);
+         if (number >= 1000) return Thousand + ArabicDecimalToRoman(number - 1000);
+         if (number >= 900) return "CM" + ArabicDecimalToRoman(number - 900);
+         if (number >= 500) return FiveHundred + ArabicDecimalToRoman(number - 500);
+         if (number >= 400) return "CD" + ArabicDecimalToRoman(number - 400);
+         if (number >= 100) return Hundred + ArabicDecimalToRoman(number - 100);
+         if (number >= 90) return "XC" + ArabicDecimalToRoman(number - 90);
+         if (number >= 50) return Fifty + ArabicDecimalToRoman(number - 50);
+         if (number >= 40) return "XL" + ArabicDecimalToRoman(number - 40);
+         if (number >= 10) return Ten + ArabicDecimalToRoman(number - 10);
+         if (number >= 9) return "IX" + ArabicDecimalToRoman(number - 9);
+         if (number >= 5) return Five + ArabicDecimalToRoman(number - 5);
+         if (number >= 4) return "IV" + ArabicDecimalToRoman(number - 4);
+         return One + ArabicDecimalToRoman(number - 1);
       }
    }
 }

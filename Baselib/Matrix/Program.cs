@@ -21,7 +21,7 @@ namespace Matrix {
       
       public static void Main(string[] args) {
 
-         Console.WriteLine(MathConvertor.DecimalToRoman(49));
+         Console.WriteLine(MathConvertor.ArabicDecimalToRoman(49));
          Console.WriteLine(MathConvertor.RomanToArabicDecimal("XLIX"));
          Console.WriteLine();
          // ExtraMath.CalcRoots(3, -14, -5, out var x1, out var x2);
