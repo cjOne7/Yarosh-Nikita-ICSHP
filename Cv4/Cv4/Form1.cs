@@ -13,6 +13,13 @@ namespace Cv4 {
       public Form1() {
          InitializeComponent();
       }
-      
+
+      private void button1_Click(object sender, EventArgs e) {
+         throw new System.NotImplementedException();
+      }
+
+      private void ExitBtn_Click(object sender, EventArgs e) {
+         throw new System.NotImplementedException();
+      }
    }
 }
