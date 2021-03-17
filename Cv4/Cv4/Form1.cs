@@ -34,8 +34,8 @@ namespace Cv4 {
       }
 
       private void gameListBox_KeyDown(object sender, KeyEventArgs e) {
-         if (gameListBox.Items.Contains(e.KeyCode.ToString())){
-            gameListBox.Items.Remove(e.KeyCode.ToString());
+         if (gameListBox.Items.Contains(e.KeyCode)){
+            gameListBox.Items.Remove(e.KeyCode);
             gameListBox.Refresh();
             UpdateTimerTimeInterval();
             _stats.Update(true);
@@ -62,7 +62,7 @@ namespace Cv4 {
          }
 
          timer1.Interval -= decrement;
-         if (difficultProgressBar.Value < 760){
+         if (difficultProgressBar.Value < 800){
             difficultProgressBar.Value += decrement;
          }
       }
