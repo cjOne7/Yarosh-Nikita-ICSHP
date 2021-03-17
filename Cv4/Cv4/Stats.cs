@@ -29,8 +29,8 @@ namespace Cv4 {
             Missed++;
          }
 
-         if (Missed != 0){
-            Accuracy = Correct / (Missed + Correct);
+         if (Correct != 0){
+            Accuracy = Math.Round((double) Correct / (Missed + Correct), 1) * 100;
          }
       }
    }
