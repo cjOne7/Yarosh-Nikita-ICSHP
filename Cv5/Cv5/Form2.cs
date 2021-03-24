@@ -22,9 +22,16 @@ namespace Cv5 {
          var goals = int.Parse(GoalsTextBox.Text);
          var gamer = new Gamer(name, club, goals);
          var item = new ListViewItem();
-         f.Gamers.Add(gamer);
          item.SubItems.Add(gamer.ToString());
+         
+         // var form1 = new Form1();
+         // form1.Gamers.Add(gamer);
+         // form1.PlayersListView.Items.Add(item);
+         // form1.PlayersListView.Refresh();
+         
+         f.Gamers.Add(gamer);
          f.PlayersListView.Items.Add(item);
+         f.PlayersListView.Refresh();
          Close();
       }
 
