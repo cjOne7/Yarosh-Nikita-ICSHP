@@ -81,6 +81,7 @@
          this.DeleteBtn.TabIndex = 2;
          this.DeleteBtn.Text = "Delete";
          this.DeleteBtn.UseVisualStyleBackColor = true;
+         this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
          // 
          // ChangeBtn
          // 
@@ -126,6 +127,7 @@
          this.CloseBtn.TabIndex = 7;
          this.CloseBtn.Text = "Close";
          this.CloseBtn.UseVisualStyleBackColor = true;
+         this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
          // 
          // Form1
          // 
