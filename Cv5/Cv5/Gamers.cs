@@ -3,10 +3,15 @@ using System.Linq;
 
 namespace Cv5 {
    public class Gamers {
+      public delegate void NumberChangedEventHandler(object sender, EventArgs eventArgs);
       private Gamer[] _gamers;
       private int _capacity;
-
+      public event NumberChangedEventHandler NumberChanged;
       public int CurrentCount { get; private set; }
+
+      public virtual void OnNumberChanged(EventArgs eventArgs) {
+         NumberChanged?.Invoke(this, eventArgs);
+      }
 
       public Gamers(int capacity) {
          _capacity = capacity;
@@ -36,7 +41,7 @@ namespace Cv5 {
          }
       }
 
-      public Gamer[] FindTheBestClub(out FootballClub[] clubs, out int maxGoals) {
+      public void FindTheBestClub(out FootballClub[] clubs, out int maxGoals) {
          var gamers = new Gamer[CurrentCount];
          Array.Copy(_gamers, 0, gamers, 0, CurrentCount);
 
@@ -61,12 +66,7 @@ namespace Cv5 {
             clubs[k] = gamers[k].Club;
             k++;
          }
-
-         return gamers;
       }
-
-      private delegate void NumberChangedEventHandler(object sender, EventArgs eventArgs);
-
 
       private bool IsFull() {
          return _capacity == CurrentCount;

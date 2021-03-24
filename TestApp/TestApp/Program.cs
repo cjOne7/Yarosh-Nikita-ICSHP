@@ -1,5 +1,4 @@
 ﻿using System;
-using Cv5;
 
 namespace TestApp {
    internal class Program {

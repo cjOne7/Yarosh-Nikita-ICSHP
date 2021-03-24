@@ -1,4 +1,4 @@
-﻿namespace Cv5 {
+﻿namespace TestApp {
    public class Gamer {
       public string Name { get; }
 

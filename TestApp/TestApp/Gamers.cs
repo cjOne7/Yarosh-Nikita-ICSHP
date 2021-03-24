@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Cv5 {
+namespace TestApp {
    public class Gamers {
       private Gamer[] _gamers;
       private int _capacity;
