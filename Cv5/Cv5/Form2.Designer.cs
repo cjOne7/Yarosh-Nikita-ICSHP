@@ -26,9 +26,9 @@ namespace Cv5 {
       /// the contents of this method with the code editor.
       /// </summary>
       private void InitializeComponent() {
-         this.comboBox1 = new System.Windows.Forms.ComboBox();
-         this.textBox1 = new System.Windows.Forms.TextBox();
-         this.textBox2 = new System.Windows.Forms.TextBox();
+         this.ClubComboBox = new System.Windows.Forms.ComboBox();
+         this.NameTextBox = new System.Windows.Forms.TextBox();
+         this.GoalsTextBox = new System.Windows.Forms.TextBox();
          this.ConfirmBtn = new System.Windows.Forms.Button();
          this.CancelBtn = new System.Windows.Forms.Button();
          this.NameLabel = new System.Windows.Forms.Label();
@@ -36,27 +36,27 @@ namespace Cv5 {
          this.GoalsLabel = new System.Windows.Forms.Label();
          this.SuspendLayout();
          // 
-         // comboBox1
+         // ClubComboBox
          // 
-         this.comboBox1.FormattingEnabled = true;
-         this.comboBox1.Location = new System.Drawing.Point(118, 76);
-         this.comboBox1.Name = "comboBox1";
-         this.comboBox1.Size = new System.Drawing.Size(165, 24);
-         this.comboBox1.TabIndex = 0;
+         this.ClubComboBox.FormattingEnabled = true;
+         this.ClubComboBox.Location = new System.Drawing.Point(118, 76);
+         this.ClubComboBox.Name = "ClubComboBox";
+         this.ClubComboBox.Size = new System.Drawing.Size(165, 24);
+         this.ClubComboBox.TabIndex = 0;
          // 
-         // textBox1
+         // NameTextBox
          // 
-         this.textBox1.Location = new System.Drawing.Point(118, 33);
-         this.textBox1.Name = "textBox1";
-         this.textBox1.Size = new System.Drawing.Size(165, 22);
-         this.textBox1.TabIndex = 1;
+         this.NameTextBox.Location = new System.Drawing.Point(118, 33);
+         this.NameTextBox.Name = "NameTextBox";
+         this.NameTextBox.Size = new System.Drawing.Size(165, 22);
+         this.NameTextBox.TabIndex = 1;
          // 
-         // textBox2
+         // GoalsTextBox
          // 
-         this.textBox2.Location = new System.Drawing.Point(118, 125);
-         this.textBox2.Name = "textBox2";
-         this.textBox2.Size = new System.Drawing.Size(165, 22);
-         this.textBox2.TabIndex = 2;
+         this.GoalsTextBox.Location = new System.Drawing.Point(118, 125);
+         this.GoalsTextBox.Name = "GoalsTextBox";
+         this.GoalsTextBox.Size = new System.Drawing.Size(165, 22);
+         this.GoalsTextBox.TabIndex = 2;
          // 
          // ConfirmBtn
          // 
@@ -110,14 +110,18 @@ namespace Cv5 {
          this.Controls.Add(this.NameLabel);
          this.Controls.Add(this.CancelBtn);
          this.Controls.Add(this.ConfirmBtn);
-         this.Controls.Add(this.textBox2);
-         this.Controls.Add(this.textBox1);
-         this.Controls.Add(this.comboBox1);
+         this.Controls.Add(this.GoalsTextBox);
+         this.Controls.Add(this.NameTextBox);
+         this.Controls.Add(this.ClubComboBox);
          this.Name = "Form2";
          this.Text = "Form2";
          this.ResumeLayout(false);
          this.PerformLayout();
       }
+
+      private System.Windows.Forms.ComboBox ClubComboBox;
+      private System.Windows.Forms.TextBox GoalsTextBox;
+      private System.Windows.Forms.TextBox NameTextBox;
 
       private System.Windows.Forms.Button CancelBtn;
       private System.Windows.Forms.Button ConfirmBtn;
@@ -126,10 +130,6 @@ namespace Cv5 {
 
       private System.Windows.Forms.Label ClubLabel;
       private System.Windows.Forms.Label NameLabel;
-      private System.Windows.Forms.TextBox textBox1;
-      private System.Windows.Forms.TextBox textBox2;
-
-      private System.Windows.Forms.ComboBox comboBox1;
 
       #endregion
    }

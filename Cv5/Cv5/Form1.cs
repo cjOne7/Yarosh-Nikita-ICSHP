@@ -17,7 +17,7 @@ namespace Cv5 {
       }
 
       private void AddBtn_Click(object sender, EventArgs e) {
-         form2 = new Form2(this);
+         form2 = new Form2();
          form2.Show();
          
       }
