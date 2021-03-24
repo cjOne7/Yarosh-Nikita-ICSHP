@@ -25,6 +25,9 @@
       /// </summary>
       private void InitializeComponent() {
          this.PlayersListView = new System.Windows.Forms.ListView();
+         this.NameColumn = new System.Windows.Forms.ColumnHeader();
+         this.ClubColumn = new System.Windows.Forms.ColumnHeader();
+         this.GoalsColumn = new System.Windows.Forms.ColumnHeader();
          this.AddBtn = new System.Windows.Forms.Button();
          this.DeleteBtn = new System.Windows.Forms.Button();
          this.ChangeBtn = new System.Windows.Forms.Button();
@@ -32,9 +35,6 @@
          this.RegisterBtn = new System.Windows.Forms.Button();
          this.CancelRegistrationBtn = new System.Windows.Forms.Button();
          this.CloseBtn = new System.Windows.Forms.Button();
-         this.NameColumn = new System.Windows.Forms.ColumnHeader();
-         this.ClubColumn = new System.Windows.Forms.ColumnHeader();
-         this.GoalsColumn = new System.Windows.Forms.ColumnHeader();
          this.SuspendLayout();
          // 
          // PlayersListView
@@ -47,6 +47,21 @@
          this.PlayersListView.TabIndex = 0;
          this.PlayersListView.UseCompatibleStateImageBehavior = false;
          this.PlayersListView.View = System.Windows.Forms.View.Details;
+         // 
+         // NameColumn
+         // 
+         this.NameColumn.Text = "Name";
+         this.NameColumn.Width = 150;
+         // 
+         // ClubColumn
+         // 
+         this.ClubColumn.Text = "Club";
+         this.ClubColumn.Width = 150;
+         // 
+         // GoalsColumn
+         // 
+         this.GoalsColumn.Text = "Goals";
+         this.GoalsColumn.Width = 150;
          // 
          // AddBtn
          // 
@@ -111,21 +126,6 @@
          this.CloseBtn.TabIndex = 7;
          this.CloseBtn.Text = "Close";
          this.CloseBtn.UseVisualStyleBackColor = true;
-         // 
-         // NameColumn
-         // 
-         this.NameColumn.Text = "Name";
-         this.NameColumn.Width = 150;
-         // 
-         // ClubColumn
-         // 
-         this.ClubColumn.Text = "Club";
-         this.ClubColumn.Width = 150;
-         // 
-         // GoalsColumn
-         // 
-         this.GoalsColumn.Text = "Goals";
-         this.GoalsColumn.Width = 150;
          // 
          // Form1
          // 

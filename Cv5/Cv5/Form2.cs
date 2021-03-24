@@ -21,13 +21,8 @@ namespace Cv5 {
          var club = (FootballClub) Enum.Parse(typeof(FootballClub), ClubComboBox.Text);
          var goals = int.Parse(GoalsTextBox.Text);
          var gamer = new Gamer(name, club, goals);
-         var item = new ListViewItem();
-         item.SubItems.Add(gamer.ToString());
-         
-         // var form1 = new Form1();
-         // form1.Gamers.Add(gamer);
-         // form1.PlayersListView.Items.Add(item);
-         // form1.PlayersListView.Refresh();
+         string[] row = { name, FootballClubInfo.GetName(club), GoalsTextBox.Text };
+         var item = new ListViewItem(row);
          
          f.Gamers.Add(gamer);
          f.PlayersListView.Items.Add(item);
