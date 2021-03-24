@@ -24,8 +24,7 @@
       /// the contents of this method with the code editor.
       /// </summary>
       private void InitializeComponent() {
-         this.listView1 = new System.Windows.Forms.ListView();
-         this.Goals = new System.Windows.Forms.DataGridViewTextBoxColumn();
+         this.PlayersListView = new System.Windows.Forms.ListView();
          this.AddBtn = new System.Windows.Forms.Button();
          this.DeleteBtn = new System.Windows.Forms.Button();
          this.ChangeBtn = new System.Windows.Forms.Button();
@@ -35,17 +34,13 @@
          this.CloseBtn = new System.Windows.Forms.Button();
          this.SuspendLayout();
          // 
-         // listView1
+         // PlayersListView
          // 
-         this.listView1.Location = new System.Drawing.Point(21, 19);
-         this.listView1.Name = "listView1";
-         this.listView1.Size = new System.Drawing.Size(562, 401);
-         this.listView1.TabIndex = 0;
-         this.listView1.UseCompatibleStateImageBehavior = false;
-         // 
-         // Goals
-         // 
-         this.Goals.Name = "Goals";
+         this.PlayersListView.Location = new System.Drawing.Point(21, 19);
+         this.PlayersListView.Name = "PlayersListView";
+         this.PlayersListView.Size = new System.Drawing.Size(562, 401);
+         this.PlayersListView.TabIndex = 0;
+         this.PlayersListView.UseCompatibleStateImageBehavior = false;
          // 
          // AddBtn
          // 
@@ -123,11 +118,13 @@
          this.Controls.Add(this.ChangeBtn);
          this.Controls.Add(this.DeleteBtn);
          this.Controls.Add(this.AddBtn);
-         this.Controls.Add(this.listView1);
+         this.Controls.Add(this.PlayersListView);
          this.Name = "Form1";
          this.Text = "Champions League";
          this.ResumeLayout(false);
       }
+
+      public System.Windows.Forms.ListView PlayersListView;
 
       private System.Windows.Forms.Button CancelRegistrationBtn;
 
@@ -142,9 +139,6 @@
 
       private System.Windows.Forms.Button AddBtn;
 
-      private System.Windows.Forms.DataGridViewTextBoxColumn Goals;
-
-      private System.Windows.Forms.ListView listView1;
 
       #endregion
    }

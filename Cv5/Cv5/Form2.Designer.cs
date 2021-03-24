@@ -60,21 +60,23 @@ namespace Cv5 {
          // 
          // ConfirmBtn
          // 
-         this.ConfirmBtn.Location = new System.Drawing.Point(37, 192);
+         this.ConfirmBtn.Location = new System.Drawing.Point(37, 180);
          this.ConfirmBtn.Name = "ConfirmBtn";
-         this.ConfirmBtn.Size = new System.Drawing.Size(75, 23);
+         this.ConfirmBtn.Size = new System.Drawing.Size(82, 35);
          this.ConfirmBtn.TabIndex = 3;
          this.ConfirmBtn.Text = "Confirm";
          this.ConfirmBtn.UseVisualStyleBackColor = true;
+         this.ConfirmBtn.Click += new System.EventHandler(this.ConfirmBtn_Click);
          // 
          // CancelBtn
          // 
-         this.CancelBtn.Location = new System.Drawing.Point(179, 192);
+         this.CancelBtn.Location = new System.Drawing.Point(179, 180);
          this.CancelBtn.Name = "CancelBtn";
-         this.CancelBtn.Size = new System.Drawing.Size(75, 23);
+         this.CancelBtn.Size = new System.Drawing.Size(82, 35);
          this.CancelBtn.TabIndex = 4;
          this.CancelBtn.Text = "Cancel";
          this.CancelBtn.UseVisualStyleBackColor = true;
+         this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
          // 
          // NameLabel
          // 
@@ -114,7 +116,7 @@ namespace Cv5 {
          this.Controls.Add(this.NameTextBox);
          this.Controls.Add(this.ClubComboBox);
          this.Name = "Form2";
-         this.Text = "Form2";
+         this.Text = "Player";
          this.ResumeLayout(false);
          this.PerformLayout();
       }
