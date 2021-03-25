@@ -91,6 +91,7 @@
          this.ChangeBtn.TabIndex = 3;
          this.ChangeBtn.Text = "Change";
          this.ChangeBtn.UseVisualStyleBackColor = true;
+         this.ChangeBtn.Click += new System.EventHandler(this.ChangeBtn_Click);
          // 
          // TheBestPlayerBtn
          // 

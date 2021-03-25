@@ -3,14 +3,16 @@ using System.Linq;
 
 namespace Cv5 {
    public class Gamers {
-      public delegate void NumberChangedEventHandler(object sender, EventArgs eventArgs);
+      
       private Gamer[] _gamers;
       private int _capacity;
-      public event NumberChangedEventHandler NumberChanged;
       public int CurrentCount { get; private set; }
+      
+      public delegate void NumberChangedEventHandler(int number);
+      public event NumberChangedEventHandler NumberChanged;
 
-      public virtual void OnNumberChanged(EventArgs eventArgs) {
-         NumberChanged?.Invoke(this, eventArgs);
+      public virtual void OnNumberChanged(int number) {
+         NumberChanged?.Invoke(number);
       }
 
       public Gamers(int capacity) {

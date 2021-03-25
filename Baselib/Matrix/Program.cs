@@ -11,14 +11,6 @@ namespace Matrix {
       private static readonly double[] Array = new double[10];
       private static int _pos;
 
-      private const char One = 'i';
-      private const char Five = 'v';
-      private const char Ten = 'x';
-      private const char Fifty = 'l';
-      private const char Hundred = 'c';
-      private const char FiveHundred = 'd';
-      private const char Thousand = 'm';
-      
       public static void Main(string[] args) {
 
          Console.WriteLine(MathConvertor.ArabicDecimalToRoman(49));
