@@ -35,6 +35,7 @@
          this.RegisterBtn = new System.Windows.Forms.Button();
          this.CancelRegistrationBtn = new System.Windows.Forms.Button();
          this.CloseBtn = new System.Windows.Forms.Button();
+         this.MessageBox = new System.Windows.Forms.ListBox();
          this.SuspendLayout();
          // 
          // PlayersListView
@@ -43,7 +44,7 @@
          this.PlayersListView.FullRowSelect = true;
          this.PlayersListView.Location = new System.Drawing.Point(21, 19);
          this.PlayersListView.Name = "PlayersListView";
-         this.PlayersListView.Size = new System.Drawing.Size(562, 401);
+         this.PlayersListView.Size = new System.Drawing.Size(562, 293);
          this.PlayersListView.TabIndex = 0;
          this.PlayersListView.UseCompatibleStateImageBehavior = false;
          this.PlayersListView.View = System.Windows.Forms.View.Details;
@@ -130,11 +131,22 @@
          this.CloseBtn.UseVisualStyleBackColor = true;
          this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
          // 
+         // MessageBox
+         // 
+         this.MessageBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+         this.MessageBox.FormattingEnabled = true;
+         this.MessageBox.ItemHeight = 29;
+         this.MessageBox.Location = new System.Drawing.Point(21, 337);
+         this.MessageBox.Name = "MessageBox";
+         this.MessageBox.Size = new System.Drawing.Size(562, 91);
+         this.MessageBox.TabIndex = 8;
+         // 
          // Form1
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(800, 450);
+         this.Controls.Add(this.MessageBox);
          this.Controls.Add(this.CloseBtn);
          this.Controls.Add(this.CancelRegistrationBtn);
          this.Controls.Add(this.RegisterBtn);
@@ -147,6 +159,8 @@
          this.Text = "Champions League";
          this.ResumeLayout(false);
       }
+
+      private System.Windows.Forms.ListBox MessageBox;
 
       private System.Windows.Forms.ColumnHeader ClubColumn;
       private System.Windows.Forms.ColumnHeader GoalsColumn;
