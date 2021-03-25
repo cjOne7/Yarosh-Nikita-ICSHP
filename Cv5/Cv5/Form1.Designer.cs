@@ -35,7 +35,7 @@
          this.RegisterBtn = new System.Windows.Forms.Button();
          this.CancelRegistrationBtn = new System.Windows.Forms.Button();
          this.CloseBtn = new System.Windows.Forms.Button();
-         this.MessageBox = new System.Windows.Forms.ListBox();
+         this.MessageTextBox = new System.Windows.Forms.TextBox();
          this.SuspendLayout();
          // 
          // PlayersListView
@@ -102,6 +102,7 @@
          this.TheBestPlayerBtn.TabIndex = 4;
          this.TheBestPlayerBtn.Text = "The best player";
          this.TheBestPlayerBtn.UseVisualStyleBackColor = true;
+         this.TheBestPlayerBtn.Click += new System.EventHandler(this.TheBestPlayerBtn_Click);
          // 
          // RegisterBtn
          // 
@@ -111,6 +112,7 @@
          this.RegisterBtn.TabIndex = 5;
          this.RegisterBtn.Text = "Register";
          this.RegisterBtn.UseVisualStyleBackColor = true;
+         this.RegisterBtn.Click += new System.EventHandler(this.RegisterBtn_Click);
          // 
          // CancelRegistrationBtn
          // 
@@ -120,6 +122,7 @@
          this.CancelRegistrationBtn.TabIndex = 6;
          this.CancelRegistrationBtn.Text = "Cancel registration";
          this.CancelRegistrationBtn.UseVisualStyleBackColor = true;
+         this.CancelRegistrationBtn.Click += new System.EventHandler(this.CancelRegistrationBtn_Click);
          // 
          // CloseBtn
          // 
@@ -131,22 +134,20 @@
          this.CloseBtn.UseVisualStyleBackColor = true;
          this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
          // 
-         // MessageBox
+         // MessageTextBox
          // 
-         this.MessageBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
-         this.MessageBox.FormattingEnabled = true;
-         this.MessageBox.ItemHeight = 29;
-         this.MessageBox.Location = new System.Drawing.Point(21, 337);
-         this.MessageBox.Name = "MessageBox";
-         this.MessageBox.Size = new System.Drawing.Size(562, 91);
-         this.MessageBox.TabIndex = 8;
+         this.MessageTextBox.Location = new System.Drawing.Point(21, 317);
+         this.MessageTextBox.Multiline = true;
+         this.MessageTextBox.Name = "MessageTextBox";
+         this.MessageTextBox.Size = new System.Drawing.Size(562, 103);
+         this.MessageTextBox.TabIndex = 9;
          // 
          // Form1
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(800, 450);
-         this.Controls.Add(this.MessageBox);
+         this.Controls.Add(this.MessageTextBox);
          this.Controls.Add(this.CloseBtn);
          this.Controls.Add(this.CancelRegistrationBtn);
          this.Controls.Add(this.RegisterBtn);
@@ -158,9 +159,10 @@
          this.Name = "Form1";
          this.Text = "Champions League";
          this.ResumeLayout(false);
+         this.PerformLayout();
       }
 
-      private System.Windows.Forms.ListBox MessageBox;
+      private System.Windows.Forms.TextBox MessageTextBox;
 
       private System.Windows.Forms.ColumnHeader ClubColumn;
       private System.Windows.Forms.ColumnHeader GoalsColumn;

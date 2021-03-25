@@ -21,7 +21,11 @@ namespace Cv5 {
          InitializeComponent();
 
          var gamer = new Gamer("Ronaldo", FootballClub.RealMadrid, 10);
+         var gamer1 = new Gamer("Ronaldo1", FootballClub.RealMadrid, 10);
+         var gamer2 = new Gamer("Ronaldo2", FootballClub.RealMadrid, 10);
          Gamers.Add(gamer);
+         Gamers.Add(gamer1);
+         Gamers.Add(gamer2);
          var item = new ListViewItem(
             new[] {"Ronaldo", FootballClubInfo.GetName(FootballClub.RealMadrid), 10.ToString()});
          PlayersListView.Items.Add(item);
@@ -55,6 +59,22 @@ namespace Cv5 {
          IsChange = true;
          form2 = new Form2(this, gamer);
          form2.Show();
+      }
+
+      private void RegisterBtn_Click(object sender, EventArgs e) {
+         Gamers.NumberChanged += NoticeChanges;
+      }
+
+      private void NoticeChanges(int number) {
+         MessageTextBox.Text = number < Gamers.Capacity ? "Player was added\n" : "Player wasn't added\n";
+      }
+
+      private void CancelRegistrationBtn_Click(object sender, EventArgs e) {
+         Gamers.NumberChanged -= NoticeChanges;
+      }
+
+      private void TheBestPlayerBtn_Click(object sender, EventArgs e) {
+         
       }
    }
 }

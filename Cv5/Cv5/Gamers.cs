@@ -5,18 +5,18 @@ namespace Cv5 {
    public class Gamers {
       
       private Gamer[] _gamers;
-      private int _capacity;
+      public int Capacity { get; private set; }
       public int CurrentCount { get; private set; }
       
       public delegate void NumberChangedEventHandler(int number);
       public event NumberChangedEventHandler NumberChanged;
 
-      public virtual void OnNumberChanged(int number) {
+      protected virtual void OnNumberChanged(int number) {
          NumberChanged?.Invoke(number);
       }
 
       public Gamers(int capacity) {
-         _capacity = capacity;
+         Capacity = capacity;
          _gamers = new Gamer[capacity];
       }
 
@@ -26,11 +26,12 @@ namespace Cv5 {
          }
 
          _gamers[CurrentCount++] = gamer;
+         OnNumberChanged(CurrentCount);
       }
 
       private void BoostArray() {
-         _capacity = 2 * _capacity;
-         var newArray = new Gamer[_capacity];
+         Capacity = 2 * Capacity;
+         var newArray = new Gamer[Capacity];
          Array.Copy(_gamers, 0, newArray, 0, CurrentCount);
 
          _gamers = newArray;
@@ -71,7 +72,7 @@ namespace Cv5 {
       }
 
       private bool IsFull() {
-         return _capacity == CurrentCount;
+         return Capacity == CurrentCount;
       }
 
       public void Delete(int index) {
