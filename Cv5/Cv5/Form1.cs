@@ -14,15 +14,15 @@ namespace Cv5 {
 
       private Form2 form2;
 
-      public bool IsChange { get; set; } = false;
+      public bool IsChange { get; set; }
 
       public Form1() {
          Gamers = new Gamers(10);
          InitializeComponent();
 
          var gamer = new Gamer("Ronaldo", FootballClub.RealMadrid, 10);
-         var gamer1 = new Gamer("Ronaldo1", FootballClub.RealMadrid, 10);
-         var gamer2 = new Gamer("Ronaldo2", FootballClub.RealMadrid, 10);
+         var gamer1 = new Gamer("Messi", FootballClub.Barcelona, 8);
+         var gamer2 = new Gamer("Alonso", FootballClub.Chelsea, 9);
          Gamers.Add(gamer);
          Gamers.Add(gamer1);
          Gamers.Add(gamer2);
@@ -30,10 +30,10 @@ namespace Cv5 {
             new[] {"Ronaldo", FootballClubInfo.GetName(FootballClub.RealMadrid), 10.ToString()});
          PlayersListView.Items.Add(item);
          var item1 = new ListViewItem(new[]
-            {"Ronaldo1", FootballClubInfo.GetName(FootballClub.RealMadrid), 10.ToString()});
+            {"Messi", FootballClubInfo.GetName(FootballClub.Barcelona), 8.ToString()});
          PlayersListView.Items.Add(item1);
          var item2 = new ListViewItem(new[]
-            {"Ronaldo2", FootballClubInfo.GetName(FootballClub.RealMadrid), 10.ToString()});
+            {"Alonso", FootballClubInfo.GetName(FootballClub.Chelsea), 9.ToString()});
          PlayersListView.Items.Add(item2);
       }
 
@@ -74,7 +74,8 @@ namespace Cv5 {
       }
 
       private void TheBestPlayerBtn_Click(object sender, EventArgs e) {
-         
+         var clubs = new TheBestClubs(this);
+         clubs.Show();
       }
    }
 }

@@ -60,14 +60,19 @@ namespace Cv5 {
 
          maxGoals = gamers[0].GoalsNumber;
          var k = 0;
-         while (maxGoals == gamers[k].GoalsNumber){
-            k++;
+         while (maxGoals == gamers[k++].GoalsNumber){
+            if (k == CurrentCount){
+               break;
+            }
          }
          clubs = new FootballClub[k];
          k = 0;
          while (maxGoals == gamers[k].GoalsNumber){
             clubs[k] = gamers[k].Club;
             k++;
+            if (k == CurrentCount){
+               break;
+            }
          }
       }
 
