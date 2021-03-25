@@ -12,7 +12,7 @@ namespace Cv5 {
          GoalsNumber.Text = goals.ToString();
          var builder = new StringBuilder();
          foreach (var club in clubs){
-            builder.Append(club).Append("\n");
+            builder.Append(club).Append(", \n");
          }
 
          ClubsList.Text = builder.ToString();

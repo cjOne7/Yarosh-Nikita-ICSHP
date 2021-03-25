@@ -60,7 +60,8 @@ namespace Cv5 {
 
          maxGoals = gamers[0].GoalsNumber;
          var k = 0;
-         while (maxGoals == gamers[k++].GoalsNumber){
+         while (maxGoals == gamers[k].GoalsNumber){
+            k++;
             if (k == CurrentCount){
                break;
             }
