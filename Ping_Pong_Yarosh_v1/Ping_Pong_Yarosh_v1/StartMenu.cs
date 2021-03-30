@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ping_Pong_Yarosh_v1 {
-   public partial class Form1 : Form {
-      public Form1() {
+   public partial class StartMenu : Form {
+      public StartMenu() {
          InitializeComponent();
       }
 
       private void startNewGame_Click(object sender, EventArgs e) {
-         var enterPlayersNames = new EnterPlayersNames();
+         var enterPlayersNames = new EnterPlayersNames(this);
          enterPlayersNames.Show();
       }
 

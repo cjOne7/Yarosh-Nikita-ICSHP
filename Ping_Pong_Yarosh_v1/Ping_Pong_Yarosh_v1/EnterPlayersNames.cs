@@ -3,9 +3,13 @@ using System.Windows.Forms;
 
 namespace Ping_Pong_Yarosh_v1 {
    public partial class EnterPlayersNames : Form {
-      private StartMenu _startMenu;
+      private readonly StartMenu _startMenu;
       public EnterPlayersNames() {
          InitializeComponent();
+      }
+
+      public EnterPlayersNames(StartMenu startMenu) : this() {
+         _startMenu = startMenu;
       }
 
       private void ConfirmBtn_Click(object sender, EventArgs e) {
@@ -15,7 +19,9 @@ namespace Ping_Pong_Yarosh_v1 {
             ErrorMessLabel.Text = "Both fields must be filled";
          }
          else{
-            var gameField = new GameField(playerName1, playerName2);
+            var gameField = new GameField(playerName1, playerName2, _startMenu);
+            _startMenu.Hide();
+            Close();
             gameField.Show();
          }
       }

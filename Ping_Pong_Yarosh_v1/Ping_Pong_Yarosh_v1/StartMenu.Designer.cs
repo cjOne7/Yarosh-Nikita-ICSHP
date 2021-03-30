@@ -1,5 +1,5 @@
 ﻿namespace Ping_Pong_Yarosh_v1 {
-   partial class Form1 {
+   partial class StartMenu {
       /// <summary>
       /// Required designer variable.
       /// </summary>
@@ -72,7 +72,7 @@
          this.Controls.Add(this.ExitBtn);
          this.Controls.Add(this.StartNewGame);
          this.ForeColor = System.Drawing.Color.Black;
-         this.Name = "Form1";
+         this.Name = "StartMenu";
          this.Text = "Form1";
          this.ResumeLayout(false);
       }
