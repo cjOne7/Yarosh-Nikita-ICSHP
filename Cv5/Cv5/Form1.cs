@@ -79,7 +79,7 @@ namespace Cv5 {
       }
 
       private void SaveBtn_Click(object sender, EventArgs e) {
-         var saveForm = new SaveForm();
+         var saveForm = new SaveForm(Gamers);
          saveForm.Show();
       }
 
