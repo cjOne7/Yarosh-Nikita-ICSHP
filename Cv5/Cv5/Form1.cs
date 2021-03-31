@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -84,6 +86,28 @@ namespace Cv5 {
       }
 
       private void LoadBtn_Click(object sender, EventArgs e) {
+         var openFileDialog = new OpenFileDialog {Title = @"Choose file"};
+         openFileDialog.ShowDialog();
+         var fileName = openFileDialog.FileName;
+         var list = File.ReadLines(fileName).ToList();
+         var gamer = new Gamer();
+         for (var i = 0; i < list.Count; i++){
+            var fields = list[i].Split(',');
+            for (var j = 0; j < fields.Length; j++){
+               var attributes = fields[j].Split(':');
+               if (attributes[0].ToLower().Equals("name")){
+                  gamer.Name = attributes[1].Trim();
+               }
+               else if (attributes[0].Equals("club")){
+                  gamer.Club = (FootballClub) Enum.Parse(typeof(FootballClub), attributes[1].Trim());
+               }
+               else if (attributes[0].Equals("goals")){
+                  gamer.GoalsNumber = int.Parse(attributes[1].Trim());
+               }
+            }
+         }
+         Gamers.Add(gamer);
+         
       }
    }
 }

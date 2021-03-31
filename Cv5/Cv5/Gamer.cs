@@ -17,7 +17,7 @@
       }
 
       public override string ToString() {
-         return $"Name:{Name},club:{Club},goals:{GoalsNumber}";
+         return $"Name: {Name}, club: {Club}, goals: {GoalsNumber}";
       }
    }
 }
