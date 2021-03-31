@@ -72,46 +72,27 @@ namespace TestApp {
       public void Insert(int index, object value) {
          CheckForNull(value);
          CheckIndex(index);
-         var i = 0;
-         var node = head;
-         while (i++ != index - 1){
-            node = node.next;
+         if (index == size - 1){
+            Add(value);
          }
+         else{
+            var i = 0;
+            var node = head;
+            while (i++ != index - 1){
+               node = node.next;
+            }
 
-         var newNode = new Node(value, node.next, node);
-         var nextNode = node.next;
-         nextNode.prev = newNode;
-         node.next = newNode;
-         size++;
+            var newNode = new Node(value, node.next, node);
+            var nextNode = node.next;
+            nextNode.prev = newNode;
+            node.next = newNode;
+            size++;     
+         }
       }
 
       public void Remove(object value) {
          CheckForNull(value);
-         if (IsEmpty()){
-            throw new EvaluateException("Empty list.");
-         }
-
-         if (size == 1){
-            Clear();
-            return;
-         }
-
-         if (value.Equals(head.data)){
-            RemoveFirst();
-         }
-         else if (value.Equals(tail.data)){
-            RemoveLast();
-         }
-         else{
-            var node = head;
-            while (!node.data.Equals(value)){
-               node = node.next;
-            }
-
-            ReassignNodes(node);
-         }
-
-         size--;
+         RemoveAt(IndexOf(value));
       }
 
       public void RemoveAt(int index) {
@@ -119,12 +100,12 @@ namespace TestApp {
          if (IsEmpty()){
             throw new EvaluateException("Empty list.");
          }
-
+         
          if (size == 1){
             Clear();
             return;
          }
-
+         
          if (index == 0){
             RemoveFirst();
          }
@@ -137,9 +118,10 @@ namespace TestApp {
             while (i++ != index){
                node = node.next;
             }
-
+         
             ReassignNodes(node);
          }
+         size--;
       }
 
       private static void ReassignNodes(Node node) {
@@ -159,7 +141,11 @@ namespace TestApp {
       }
 
       public void CopyTo(Array array, int index) {
-         throw new NotImplementedException();
+         CheckForNull(array);
+         CheckIndex(index);
+         for (var i = 0; i < size; i++){
+            array.SetValue(this[index], index++);
+         }
       }
 
       public object this[int index] {
@@ -177,7 +163,7 @@ namespace TestApp {
 
             return node.data;
          }
-         set => this[index] = value ?? throw new ArgumentNullException(nameof(value));
+         set => Insert(index, value);
       }
 
       private class Node {
