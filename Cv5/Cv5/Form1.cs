@@ -77,5 +77,13 @@ namespace Cv5 {
          var clubs = new TheBestClubs(this);
          clubs.Show();
       }
+
+      private void SaveBtn_Click(object sender, EventArgs e) {
+         var saveForm = new SaveForm();
+         saveForm.Show();
+      }
+
+      private void LoadBtn_Click(object sender, EventArgs e) {
+      }
    }
 }
