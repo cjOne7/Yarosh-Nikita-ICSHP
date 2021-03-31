@@ -19,10 +19,10 @@ namespace Ping_Pong_Yarosh_v1 {
             ErrorMessLabel.Text = "Both fields must be filled";
          }
          else{
-            var gameField = new GameField(playerName1, playerName2, _startMenu);
-            _startMenu.Hide();
-            Close();
-            gameField.Show();
+            // var gameField = new PracticeGameField(playerName1, playerName2, _startMenu);
+            // _startMenu.Hide();
+            // Close();
+            // gameField.Show();
          }
       }
       

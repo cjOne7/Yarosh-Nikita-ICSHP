@@ -2,47 +2,47 @@
 using System.Windows.Forms;
 
 namespace Ping_Pong_Yarosh_v1 {
-   public partial class GameField : Form {
+   public partial class PracticeGameField : Form {
       private int _speedLeft = 4;
       private int _speedTop = 4;
       private int _points;
 
-      private string _playerName1;
-      private string _playerName2;
-
       private readonly StartMenu _startMenu;
 
-      public GameField() {
+      private PracticeGameField() {
          InitializeComponent();
-         Cursor.Hide();
-         // FormBorderStyle = FormBorderStyle.None;
+         FormBorderStyle = FormBorderStyle.None;
          TopMost = true;
          Bounds = Screen.PrimaryScreen.Bounds; //full screen 
          Racket.Top = Playground.Bottom - (Playground.Bottom / 10); // racket init pos
-         // PauseLabel;
+         PauseLabel.Left = (Playground.Width - PauseLabel.Width) / 2;
+         PauseLabel.Top = (Playground.Height - PauseLabel.Height) / 2;
       }
 
-      public GameField(string playerName1, string playerName2) : this() {
-         _playerName1 = playerName1;
-         _playerName2 = playerName2;
-      }
-
-      public GameField(string playerName1, string playerName2, StartMenu startMenu) : this(playerName1, playerName2) {
+      public PracticeGameField(StartMenu startMenu) : this() {
          _startMenu = startMenu;
       }
 
       private void timer_Tick(object sender, EventArgs e) {
-         Racket.Left = Cursor.Position.X - Racket.Width / 2;
-         
-         Ball.Left += _speedLeft;
-         Ball.Top += _speedTop;
+         if (Cursor.Position.X - Racket.Width / 2 <= Playground.Left){
+            Racket.Left = Playground.Left;
+         } else if (Cursor.Position.X + Racket.Width / 2 >= Playground.Right){
+            Racket.Left = Playground.Right - Racket.Width;
+         }
+         else{
+            Racket.Left = Cursor.Position.X - Racket.Width / 2;            
+         }
+
+         // Ball.Left += _speedLeft;
+         // Ball.Top += _speedTop;
 
          if (Ball.Bottom >= Racket.Top && Ball.Bottom <= Racket.Bottom
                                        && Ball.Left >= Racket.Left && Ball.Right <= Racket.Right){
-            _speedTop += 2;
-            _speedLeft += 2;
+            _speedTop++;
+            _speedLeft++;
             _speedTop = -_speedTop;
             _points++;
+            ScoreLabel.Text = $@"Score: {_points}";
          }
 
          if (Ball.Left <= Playground.Left){
@@ -66,7 +66,23 @@ namespace Ping_Pong_Yarosh_v1 {
          if (e.KeyCode == Keys.Escape){
             timer.Enabled = !timer.Enabled;
             PauseLabel.Visible = !PauseLabel.Visible;
+            if (timer.Enabled){
+               Cursor.Hide();
+               FormBorderStyle = FormBorderStyle.None;
+            }
+            else{
+               Cursor.Show();
+               FormBorderStyle = FormBorderStyle.Sizable;
+            }
          }
+      }
+
+      private void Playground_MouseEnter(object sender, EventArgs e) {
+         Cursor.Hide();
+      }
+
+      private void Playground_MouseLeave(object sender, EventArgs e) {
+         Cursor.Show();
       }
    }
 }

@@ -15,12 +15,20 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void startNewGame_Click(object sender, EventArgs e) {
-         var enterPlayersNames = new EnterPlayersNames(this);
-         enterPlayersNames.Show();
+         var practiceGameField = new PracticeGameField(this);  
+         practiceGameField.Show();
       }
 
       private void exit_Click(object sender, EventArgs e) {
          Close();
+      }
+
+      private void PvsPBtn_Click(object sender, EventArgs e) {
+         var enterPlayersNames = new EnterPlayersNames(this);
+         enterPlayersNames.Show();
+      }
+
+      private void DestroyBlocksBtn_Click(object sender, EventArgs e) {
       }
    }
 }

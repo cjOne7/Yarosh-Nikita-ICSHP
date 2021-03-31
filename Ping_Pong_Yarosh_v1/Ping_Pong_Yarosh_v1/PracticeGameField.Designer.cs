@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 
 namespace Ping_Pong_Yarosh_v1 {
-   partial class GameField {
+   partial class PracticeGameField {
       /// <summary>
       /// Required designer variable.
       /// </summary>
@@ -33,6 +33,7 @@ namespace Ping_Pong_Yarosh_v1 {
          this.Ball = new System.Windows.Forms.PictureBox();
          this.Racket = new System.Windows.Forms.PictureBox();
          this.timer = new System.Windows.Forms.Timer(this.components);
+         this.label1 = new System.Windows.Forms.Label();
          this.Playground.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize) (this.Ball)).BeginInit();
          ((System.ComponentModel.ISupportInitialize) (this.Racket)).BeginInit();
@@ -40,6 +41,7 @@ namespace Ping_Pong_Yarosh_v1 {
          // 
          // Playground
          // 
+         this.Playground.Controls.Add(this.label1);
          this.Playground.Controls.Add(this.PauseLabel);
          this.Playground.Controls.Add(this.ScoreLabel);
          this.Playground.Controls.Add(this.Ball);
@@ -49,25 +51,30 @@ namespace Ping_Pong_Yarosh_v1 {
          this.Playground.Name = "Playground";
          this.Playground.Size = new System.Drawing.Size(800, 450);
          this.Playground.TabIndex = 0;
+         this.Playground.MouseEnter += new System.EventHandler(this.Playground_MouseEnter);
+         this.Playground.MouseLeave += new System.EventHandler(this.Playground_MouseLeave);
          // 
          // PauseLabel
          // 
-         this.PauseLabel.Font = new System.Drawing.Font("Century Gothic", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+         this.PauseLabel.Font = new System.Drawing.Font("Century Gothic", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
          this.PauseLabel.ForeColor = System.Drawing.Color.White;
-         this.PauseLabel.Location = new System.Drawing.Point(211, 120);
+         this.PauseLabel.Location = new System.Drawing.Point(104, 57);
          this.PauseLabel.Name = "PauseLabel";
-         this.PauseLabel.Size = new System.Drawing.Size(398, 43);
+         this.PauseLabel.Size = new System.Drawing.Size(547, 92);
          this.PauseLabel.TabIndex = 3;
          this.PauseLabel.Text = "II The game is paused";
          this.PauseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         this.PauseLabel.Visible = false;
          // 
          // ScoreLabel
          // 
+         this.ScoreLabel.Font = new System.Drawing.Font("Century Gothic", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
          this.ScoreLabel.ForeColor = System.Drawing.Color.White;
          this.ScoreLabel.Location = new System.Drawing.Point(12, 9);
          this.ScoreLabel.Name = "ScoreLabel";
-         this.ScoreLabel.Size = new System.Drawing.Size(100, 23);
+         this.ScoreLabel.Size = new System.Drawing.Size(201, 48);
          this.ScoreLabel.TabIndex = 2;
+         this.ScoreLabel.Text = "Score: 0";
          // 
          // Ball
          // 
@@ -93,14 +100,23 @@ namespace Ping_Pong_Yarosh_v1 {
          this.timer.Interval = 1;
          this.timer.Tick += new System.EventHandler(this.timer_Tick);
          // 
-         // GameField
+         // label1
+         // 
+         this.label1.BackColor = System.Drawing.Color.White;
+         this.label1.Location = new System.Drawing.Point(426, 254);
+         this.label1.Name = "label1";
+         this.label1.Size = new System.Drawing.Size(100, 23);
+         this.label1.TabIndex = 4;
+         this.label1.Text = "label1";
+         // 
+         // PracticeGameField
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
          this.ClientSize = new System.Drawing.Size(800, 450);
          this.Controls.Add(this.Playground);
-         this.Name = "GameField";
+         this.Name = "PracticeGameField";
          this.Text = "GameField";
          this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameField_KeyDown);
          this.Playground.ResumeLayout(false);
@@ -108,6 +124,8 @@ namespace Ping_Pong_Yarosh_v1 {
          ((System.ComponentModel.ISupportInitialize) (this.Racket)).EndInit();
          this.ResumeLayout(false);
       }
+
+      private System.Windows.Forms.Label label1;
 
       private System.Windows.Forms.Label PauseLabel;
       private System.Windows.Forms.Label ScoreLabel;
