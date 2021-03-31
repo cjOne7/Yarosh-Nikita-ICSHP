@@ -4,16 +4,15 @@ using System.Data;
 
 namespace TestApp {
    public class LinkedList : IList {
-      private Node head;
-      private Node tail;
-      private int size;
+      private Node _head;
+      private Node _tail;
 
-      public bool IsEmpty() {
-         return size == 0 && head == null && tail == null;
+      private bool IsEmpty() {
+         return Count == 0 && _head == null && _tail == null;
       }
 
       public IEnumerator GetEnumerator() {
-         throw new NotImplementedException();
+         return new Enumerator(this);
       }
 
       public int Add(object value) {
@@ -21,72 +20,72 @@ namespace TestApp {
             return -1;
          }
 
-         var node = new Node(value, null, tail);
+         var node = new Node(value, null, _tail);
          if (IsEmpty()){
-            head = node;
-            tail = head;
+            _head = node;
+            _tail = _head;
          }
          else{
-            tail.next = node;
-            tail = node;
+            _tail.Next = node;
+            _tail = node;
          }
 
-         return size++;
+         return Count++;
       }
 
       public bool Contains(object value) {
          CheckForNull(value);
-         var node = head;
+         var node = _head;
          while (node != null){
-            if (node.data.Equals(value)){
+            if (node.Data.Equals(value)){
                return true;
             }
 
-            node = node.next;
+            node = node.Next;
          }
 
          return false;
       }
 
       public void Clear() {
-         head = tail = null;
-         size = 0;
+         _head = _tail = null;
+         Count = 0;
       }
 
       public int IndexOf(object value) {
          CheckForNull(value);
-         var node = head;
+         var node = _head;
          var i = 0;
          while (node != null){
-            if (node.data.Equals(value)){
+            if (node.Data.Equals(value)){
                return i;
             }
 
-            node = node.next;
+            node = node.Next;
             i++;
          }
 
-         return i == size ? -1 : i;
+         return i == Count ? -1 : i;
       }
 
       public void Insert(int index, object value) {
          CheckForNull(value);
          CheckIndex(index);
-         if (index == size - 1){
+         if (index == Count - 1){
             Add(value);
          }
          else{
             var i = 0;
-            var node = head;
+            var node = _head;
             while (i++ != index - 1){
-               node = node.next;
+               node = node.Next;
             }
 
-            var newNode = new Node(value, node.next, node);
-            var nextNode = node.next;
-            nextNode.prev = newNode;
-            node.next = newNode;
-            size++;     
+            var newNode = new Node(value, node.Next, node);
+            var nextNode = node.Next;
+            nextNode.Prev = newNode;
+            node.Next = newNode;
+            Count++;
          }
       }
 
@@ -100,50 +99,51 @@ namespace TestApp {
          if (IsEmpty()){
             throw new EvaluateException("Empty list.");
          }
-         
-         if (size == 1){
+
+         if (Count == 1){
             Clear();
             return;
          }
-         
+
          if (index == 0){
             RemoveFirst();
          }
-         else if (index == size - 1){
+         else if (index == Count - 1){
             RemoveLast();
          }
          else{
-            var node = head;
+            var node = _head;
             var i = 0;
             while (i++ != index){
-               node = node.next;
+               node = node.Next;
             }
-         
+
             ReassignNodes(node);
          }
-         size--;
+
+         Count--;
       }
 
       private static void ReassignNodes(Node node) {
          var deletedNode = node;
-         node.prev.next = deletedNode.next;
-         deletedNode.next.prev = node.prev;
+         node.Prev.Next = deletedNode.Next;
+         deletedNode.Next.Prev = node.Prev;
       }
 
       private void RemoveFirst() {
-         head = head.next;
-         head.prev = null;
+         _head = _head.Next;
+         _head.Prev = null;
       }
 
       private void RemoveLast() {
-         tail = tail.prev;
-         tail.next = null;
+         _tail = _tail.Prev;
+         _tail.Next = null;
       }
 
       public void CopyTo(Array array, int index) {
          CheckForNull(array);
          CheckIndex(index);
-         for (var i = 0; i < size; i++){
+         for (var i = 0; i < Count; i++){
             array.SetValue(this[index], index++);
          }
       }
@@ -155,34 +155,31 @@ namespace TestApp {
             }
 
             CheckIndex(index);
-            var node = head;
+            var node = _head;
             var i = 0;
             while (i++ != index){
-               node = node.next;
+               node = node.Next;
             }
 
-            return node.data;
+            return node.Data;
          }
          set => Insert(index, value);
       }
 
       private class Node {
-         public object data { get; set; }
-         public Node next { get; set; }
-         public Node prev { get; set; }
+         public object Data { get; }
+         public Node Next { get; set; }
+         public Node Prev { get; set; }
 
          public Node(object data, Node next, Node prev) {
-            this.data = data;
-            this.next = next;
-            this.prev = prev;
-         }
-
-         public Node(object data) {
-            this.data = data;
+            Data = data;
+            Next = next;
+            Prev = prev;
          }
       }
 
-      public int Count => size;
+      public int Count { get; private set; }
+
       public object SyncRoot => this;
       public bool IsReadOnly { get; } = false;
       public bool IsFixedSize { get; } = false;
@@ -195,9 +192,36 @@ namespace TestApp {
       }
 
       private void CheckIndex(int index) {
-         if (index < 0 || index >= size){
-            throw new IndexOutOfRangeException("Your index < 0 or >= " + size);
+         if (index < 0 || index >= Count){
+            throw new IndexOutOfRangeException("Your index < 0 or >= " + Count);
          }
+      }
+
+      private class Enumerator : IEnumerator {
+         private readonly LinkedList _list;
+         private int _index;
+
+         public Enumerator(LinkedList list) {
+            _list = list;
+            _index = 0;
+            Current = list[_index];
+         }
+
+         public bool MoveNext() {
+            if (_index >= _list.Count){
+               return false;
+            }
+
+            Current = _list[_index++];
+            return _index <= _list.Count;
+         }
+
+         public void Reset() {
+            _index = 0;
+            Current = _list[_index];
+         }
+
+         public object Current { get; private set; }
       }
    }
 }
