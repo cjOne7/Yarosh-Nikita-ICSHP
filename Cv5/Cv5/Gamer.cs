@@ -12,7 +12,7 @@
          GoalsNumber = goalsNumber;
       }
 
-      public Gamer() { }
+      public Gamer() {}
 
       public override string ToString() {
          return $"Name: {Name}, club: {Club}, goals: {GoalsNumber}";
