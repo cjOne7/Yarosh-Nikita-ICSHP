@@ -88,6 +88,7 @@ namespace Ping_Pong_Yarosh_v1 {
                _speedLeft = _speedTop = InitSpeed;
                FinishLabel.Visible = false;
                _points = 0;
+               //todo add event to update it when value has been changed
                ScoreLabel.Text = @"Score: 0";
                timer.Enabled = true;
                break;
@@ -108,6 +109,7 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void PracticeGameField_FormClosing(object sender, FormClosingEventArgs e) {
+         SaveScore();
          _startMenu.Show();
       }
 
