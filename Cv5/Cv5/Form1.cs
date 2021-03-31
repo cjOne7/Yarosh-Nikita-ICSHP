@@ -17,7 +17,7 @@ namespace Cv5 {
       public bool IsChange { get; set; }
 
       public Form1() {
-         Gamers = new Gamers(10);
+         Gamers = new Gamers();
          InitializeComponent();
 
          var gamer = new Gamer("Ronaldo", FootballClub.RealMadrid, 10);
@@ -66,7 +66,7 @@ namespace Cv5 {
       }
 
       private void NoticeChanges(int number) {
-         MessageTextBox.Text = number < Gamers.Capacity ? "Player was added\n" : "Player wasn't added\n";
+         MessageTextBox.Text = number < Gamers.LinkedList.Count ? "Player was added\n" : "Player wasn't added\n";
       }
 
       private void CancelRegistrationBtn_Click(object sender, EventArgs e) {

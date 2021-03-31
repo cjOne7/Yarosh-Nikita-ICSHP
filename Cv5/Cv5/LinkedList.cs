@@ -90,7 +90,6 @@ namespace Cv5 {
       }
 
       public void Remove(object value) {
-         CheckForNull(value);
          RemoveAt(IndexOf(value));
       }
 

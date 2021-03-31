@@ -90,7 +90,6 @@ namespace TestApp {
       }
 
       public void Remove(object value) {
-         CheckForNull(value);
          RemoveAt(IndexOf(value));
       }
 

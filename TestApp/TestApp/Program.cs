@@ -22,11 +22,18 @@ namespace TestApp {
          // linkedList.Insert(1, 1000);
          // linkedList[linkedList.Count - 1] = 200;
          // // linkedList.Remove(1);
-         // var enumerator = linkedList.GetEnumerator();
-         // while (enumerator.MoveNext()){
-         //    object o = enumerator.Current;
+         // // var enumerator = linkedList.GetEnumerator();
+         // // while (enumerator.MoveNext()){
+         // //    object o = enumerator.Current;
+         // //    Console.WriteLine(o);
+         // // }
+         //
+         // var array = new object[linkedList.Count];
+         // linkedList.CopyTo(array, 0);
+         // foreach (var o in array){
          //    Console.WriteLine(o);
          // }
+         //
          // // for (var i = 0; i < linkedList.Count; i++){
          // //    Console.WriteLine(linkedList[i]);
          // // }
