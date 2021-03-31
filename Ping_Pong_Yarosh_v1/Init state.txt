@@ -1,0 +1,4 @@
+score : 0
+ball_top : 100
+ball_left : 100
+ball_speed : 2

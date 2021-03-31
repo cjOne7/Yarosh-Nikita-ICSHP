@@ -1,8 +1,11 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Ping_Pong_Yarosh_v1 {
    public partial class PracticeGameField : Form {
+      private const string ScoreFilepath = "../../../Your relults.txt";
       private const int InitSpeed = 2;
       private int _speedLeft = InitSpeed;
       private int _speedTop = InitSpeed;
@@ -13,8 +16,8 @@ namespace Ping_Pong_Yarosh_v1 {
       private PracticeGameField() {
          InitializeComponent();
          FormBorderStyle = FormBorderStyle.None;
-         TopMost = true;
-         Bounds = Screen.PrimaryScreen.Bounds; //full screen 
+         // TopMost = true; //on top
+         // Bounds = Screen.PrimaryScreen.Bounds; //full screen 
          Racket.Top = Playground.Bottom - (Playground.Bottom / 10); // racket init pos
 
          PauseLabel.Left = (Playground.Width - PauseLabel.Width) / 2; //center
@@ -89,6 +92,7 @@ namespace Ping_Pong_Yarosh_v1 {
                timer.Enabled = true;
                break;
             case Keys.F2:
+               SaveScore();
                Close();
                _startMenu.Show();
                break;
@@ -105,6 +109,20 @@ namespace Ping_Pong_Yarosh_v1 {
 
       private void PracticeGameField_FormClosing(object sender, FormClosingEventArgs e) {
          _startMenu.Show();
+      }
+
+      private void SaveScore() {
+         var input = File.ReadLines(ScoreFilepath).ToList();
+         var sw = new StreamWriter(File.Open(ScoreFilepath, FileMode.Append));
+         if (input.Count() == 1){
+            sw.WriteLine($"\n1;{_points};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+         }
+         else{
+            var lastCount = int.Parse(input.Last().Split(';')[0]) + 1;
+            sw.WriteLine($"{lastCount};{_points};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+         }
+
+         sw.Close();
       }
    }
 }
