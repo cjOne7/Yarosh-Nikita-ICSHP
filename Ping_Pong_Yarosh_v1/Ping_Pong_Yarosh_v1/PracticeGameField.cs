@@ -39,8 +39,8 @@ namespace Ping_Pong_Yarosh_v1 {
             Racket.Left = Cursor.Position.X - Racket.Width / 2;
          }
 
-         // Ball.Left += _speedLeft;
-         // Ball.Top += _speedTop;
+         Ball.Left += _speedLeft;
+         Ball.Top += _speedTop;
 
          if (Ball.Bottom >= Racket.Top && Ball.Bottom <= Racket.Bottom
                                        && Ball.Left >= Racket.Left && Ball.Right <= Racket.Right){
