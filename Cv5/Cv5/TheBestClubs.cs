@@ -7,8 +7,8 @@ namespace Cv5 {
          InitializeComponent();
       }
 
-      public TheBestClubs(Form1 form1) : this() {
-         form1.Gamers.FindTheBestClub(out var clubs, out var goals);
+      public TheBestClubs(InitForm initForm) : this() {
+         initForm.Gamers.FindTheBestClub(out var clubs, out var goals);
          GoalsNumber.Text = goals.ToString();
          var builder = new StringBuilder();
          foreach (var club in clubs){

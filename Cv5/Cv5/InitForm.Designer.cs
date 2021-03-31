@@ -1,5 +1,5 @@
 ﻿namespace Cv5 {
-   partial class Form1 {
+   partial class InitForm {
       /// <summary>
       /// Required designer variable.
       /// </summary>
@@ -180,7 +180,7 @@
          this.Controls.Add(this.DeleteBtn);
          this.Controls.Add(this.AddBtn);
          this.Controls.Add(this.PlayersListView);
-         this.Name = "Form1";
+         this.Name = "InitForm";
          this.Text = "Champions League";
          this.ResumeLayout(false);
          this.PerformLayout();

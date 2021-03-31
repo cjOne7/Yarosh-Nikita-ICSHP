@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cv5 {
-   public partial class Form1 : Form {
+   public partial class InitForm : Form {
       public Gamers Gamers { get; }
 
       private Form2 form2;
 
       public bool IsChange { get; set; }
 
-      public Form1() {
+      public InitForm() {
          Gamers = new Gamers();
          InitializeComponent();
 
@@ -93,21 +93,27 @@ namespace Cv5 {
          var gamer = new Gamer();
          for (var i = 0; i < list.Count; i++){
             var fields = list[i].Split(',');
+            var row = new string[fields.Length];
             for (var j = 0; j < fields.Length; j++){
                var attributes = fields[j].Split(':');
                if (attributes[0].ToLower().Equals("name")){
                   gamer.Name = attributes[1].Trim();
+                  row[0] = attributes[1].Trim();
                }
                else if (attributes[0].Equals("club")){
                   gamer.Club = (FootballClub) Enum.Parse(typeof(FootballClub), attributes[1].Trim());
+                  row[1] = attributes[1].Trim();
                }
                else if (attributes[0].Equals("goals")){
                   gamer.GoalsNumber = int.Parse(attributes[1].Trim());
+                  row[2] = attributes[1].Trim();
                }
             }
+            var item = new ListViewItem(row);
+            Gamers.Add(gamer);
+            PlayersListView.Items.Add(item);
          }
-         Gamers.Add(gamer);
-         
+         PlayersListView.Refresh();
       }
    }
 }

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Cv5 {
    public partial class Form2 : Form {
-      private readonly Form1 _form1;
+      private readonly InitForm _initForm;
       private Gamer _gamer;
 
       private Form2() {
@@ -11,11 +11,11 @@ namespace Cv5 {
          ClubComboBox.DataSource = Enum.GetValues(typeof(FootballClub));
       }
 
-      public Form2(Form1 form1) : this() {
-         _form1 = form1;
+      public Form2(InitForm initForm) : this() {
+         _initForm = initForm;
       }
 
-      public Form2(Form1 form1, Gamer gamer) : this(form1) {
+      public Form2(InitForm initForm, Gamer gamer) : this(initForm) {
          _gamer = gamer;
          NameTextBox.Text = gamer.Name;
          ClubComboBox.Text = FootballClubInfo.GetName(gamer.Club);
@@ -30,15 +30,15 @@ namespace Cv5 {
          string[] row = {name, FootballClubInfo.GetName(club), GoalsTextBox.Text};
          var item = new ListViewItem(row);
 
-         if (_form1.IsChange){
-             _form1.Gamers.Delete(_form1.PlayersListView.Items.IndexOf(_form1.PlayersListView.SelectedItems[0]));
-             _form1.PlayersListView.Items.RemoveAt(_form1.PlayersListView.SelectedIndices[0]);
-            _form1.PlayersListView.Items.Add(item);
+         if (_initForm.IsChange){
+             _initForm.Gamers.Delete(_initForm.PlayersListView.Items.IndexOf(_initForm.PlayersListView.SelectedItems[0]));
+             _initForm.PlayersListView.Items.RemoveAt(_initForm.PlayersListView.SelectedIndices[0]);
+            _initForm.PlayersListView.Items.Add(item);
          }
          else{
-            _form1.Gamers.Add(gamer);
-            _form1.PlayersListView.Items.Add(item);
-            _form1.PlayersListView.Refresh();
+            _initForm.Gamers.Add(gamer);
+            _initForm.PlayersListView.Items.Add(item);
+            _initForm.PlayersListView.Refresh();
          }
 
 
