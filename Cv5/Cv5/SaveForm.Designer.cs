@@ -26,11 +26,94 @@ namespace Cv5 {
       /// the contents of this method with the code editor.
       /// </summary>
       private void InitializeComponent() {
-         this.components = new System.ComponentModel.Container();
+         this.NoneBox = new System.Windows.Forms.CheckBox();
+         this.FCPortoBox = new System.Windows.Forms.CheckBox();
+         this.ArsenalBox = new System.Windows.Forms.CheckBox();
+         this.RealMadridBox = new System.Windows.Forms.CheckBox();
+         this.ChelseaBox = new System.Windows.Forms.CheckBox();
+         this.BarcelonaBox = new System.Windows.Forms.CheckBox();
+         this.SuspendLayout();
+         // 
+         // NoneBox
+         // 
+         this.NoneBox.Location = new System.Drawing.Point(114, 30);
+         this.NoneBox.Name = "NoneBox";
+         this.NoneBox.Size = new System.Drawing.Size(104, 24);
+         this.NoneBox.TabIndex = 0;
+         this.NoneBox.Text = "None";
+         this.NoneBox.UseVisualStyleBackColor = true;
+         // 
+         // FCPortoBox
+         // 
+         this.FCPortoBox.Location = new System.Drawing.Point(114, 60);
+         this.FCPortoBox.Name = "FCPortoBox";
+         this.FCPortoBox.Size = new System.Drawing.Size(104, 24);
+         this.FCPortoBox.TabIndex = 1;
+         this.FCPortoBox.Text = "FCPorto";
+         this.FCPortoBox.UseVisualStyleBackColor = true;
+         // 
+         // ArsenalBox
+         // 
+         this.ArsenalBox.Location = new System.Drawing.Point(114, 90);
+         this.ArsenalBox.Name = "ArsenalBox";
+         this.ArsenalBox.Size = new System.Drawing.Size(104, 24);
+         this.ArsenalBox.TabIndex = 2;
+         this.ArsenalBox.Text = "Arsenal";
+         this.ArsenalBox.UseVisualStyleBackColor = true;
+         // 
+         // RealMadridBox
+         // 
+         this.RealMadridBox.Location = new System.Drawing.Point(114, 120);
+         this.RealMadridBox.Name = "RealMadridBox";
+         this.RealMadridBox.Size = new System.Drawing.Size(104, 24);
+         this.RealMadridBox.TabIndex = 3;
+         this.RealMadridBox.Text = "RealMadrid";
+         this.RealMadridBox.UseVisualStyleBackColor = true;
+         // 
+         // ChelseaBox
+         // 
+         this.ChelseaBox.Location = new System.Drawing.Point(114, 150);
+         this.ChelseaBox.Name = "ChelseaBox";
+         this.ChelseaBox.Size = new System.Drawing.Size(104, 24);
+         this.ChelseaBox.TabIndex = 4;
+         this.ChelseaBox.Text = "Chelsea";
+         this.ChelseaBox.UseVisualStyleBackColor = true;
+         // 
+         // BarcelonaBox
+         // 
+         this.BarcelonaBox.Location = new System.Drawing.Point(114, 180);
+         this.BarcelonaBox.Name = "BarcelonaBox";
+         this.BarcelonaBox.Size = new System.Drawing.Size(104, 24);
+         this.BarcelonaBox.TabIndex = 5;
+         this.BarcelonaBox.Text = "Barcelona";
+         this.BarcelonaBox.UseVisualStyleBackColor = true;
+         // 
+         // SaveForm
+         // 
+         this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(800, 450);
+         this.ClientSize = new System.Drawing.Size(336, 248);
+         this.Controls.Add(this.BarcelonaBox);
+         this.Controls.Add(this.ChelseaBox);
+         this.Controls.Add(this.RealMadridBox);
+         this.Controls.Add(this.ArsenalBox);
+         this.Controls.Add(this.FCPortoBox);
+         this.Controls.Add(this.NoneBox);
+         this.Name = "SaveForm";
          this.Text = "SaveForm";
+         this.ResumeLayout(false);
       }
+
+      private System.Windows.Forms.CheckBox BarcelonaBox;
+
+      private System.Windows.Forms.CheckBox ChelseaBox;
+
+      private System.Windows.Forms.CheckBox RealMadridBox;
+
+      private System.Windows.Forms.CheckBox ArsenalBox;
+
+      private System.Windows.Forms.CheckBox FCPortoBox;
+      private System.Windows.Forms.CheckBox NoneBox;
 
       #endregion
    }
