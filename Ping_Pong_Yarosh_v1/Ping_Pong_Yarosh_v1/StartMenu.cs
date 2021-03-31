@@ -17,6 +17,7 @@ namespace Ping_Pong_Yarosh_v1 {
       private void startNewGame_Click(object sender, EventArgs e) {
          var practiceGameField = new PracticeGameField(this);  
          practiceGameField.Show();
+         Hide();
       }
 
       private void exit_Click(object sender, EventArgs e) {

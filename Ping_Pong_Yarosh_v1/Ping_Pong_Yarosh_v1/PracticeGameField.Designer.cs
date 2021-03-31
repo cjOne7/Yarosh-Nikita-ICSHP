@@ -28,12 +28,12 @@ namespace Ping_Pong_Yarosh_v1 {
       private void InitializeComponent() {
          this.components = new System.ComponentModel.Container();
          this.Playground = new System.Windows.Forms.Panel();
+         this.FinishLabel = new System.Windows.Forms.Label();
          this.PauseLabel = new System.Windows.Forms.Label();
          this.ScoreLabel = new System.Windows.Forms.Label();
          this.Ball = new System.Windows.Forms.PictureBox();
          this.Racket = new System.Windows.Forms.PictureBox();
          this.timer = new System.Windows.Forms.Timer(this.components);
-         this.label1 = new System.Windows.Forms.Label();
          this.Playground.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize) (this.Ball)).BeginInit();
          ((System.ComponentModel.ISupportInitialize) (this.Racket)).BeginInit();
@@ -41,7 +41,7 @@ namespace Ping_Pong_Yarosh_v1 {
          // 
          // Playground
          // 
-         this.Playground.Controls.Add(this.label1);
+         this.Playground.Controls.Add(this.FinishLabel);
          this.Playground.Controls.Add(this.PauseLabel);
          this.Playground.Controls.Add(this.ScoreLabel);
          this.Playground.Controls.Add(this.Ball);
@@ -49,16 +49,28 @@ namespace Ping_Pong_Yarosh_v1 {
          this.Playground.Dock = System.Windows.Forms.DockStyle.Fill;
          this.Playground.Location = new System.Drawing.Point(0, 0);
          this.Playground.Name = "Playground";
-         this.Playground.Size = new System.Drawing.Size(800, 450);
+         this.Playground.Size = new System.Drawing.Size(931, 530);
          this.Playground.TabIndex = 0;
          this.Playground.MouseEnter += new System.EventHandler(this.Playground_MouseEnter);
          this.Playground.MouseLeave += new System.EventHandler(this.Playground_MouseLeave);
+         // 
+         // FinishLabel
+         // 
+         this.FinishLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+         this.FinishLabel.ForeColor = System.Drawing.Color.White;
+         this.FinishLabel.Location = new System.Drawing.Point(362, 173);
+         this.FinishLabel.Name = "FinishLabel";
+         this.FinishLabel.Size = new System.Drawing.Size(261, 197);
+         this.FinishLabel.TabIndex = 4;
+         this.FinishLabel.Text = "Game over\r\nF1 - restart\r\nF2 - exit\r\n";
+         this.FinishLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         this.FinishLabel.Visible = false;
          // 
          // PauseLabel
          // 
          this.PauseLabel.Font = new System.Drawing.Font("Century Gothic", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
          this.PauseLabel.ForeColor = System.Drawing.Color.White;
-         this.PauseLabel.Location = new System.Drawing.Point(104, 57);
+         this.PauseLabel.Location = new System.Drawing.Point(198, 57);
          this.PauseLabel.Name = "PauseLabel";
          this.PauseLabel.Size = new System.Drawing.Size(547, 92);
          this.PauseLabel.TabIndex = 3;
@@ -68,6 +80,7 @@ namespace Ping_Pong_Yarosh_v1 {
          // 
          // ScoreLabel
          // 
+         this.ScoreLabel.BackColor = System.Drawing.Color.Transparent;
          this.ScoreLabel.Font = new System.Drawing.Font("Century Gothic", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
          this.ScoreLabel.ForeColor = System.Drawing.Color.White;
          this.ScoreLabel.Location = new System.Drawing.Point(12, 9);
@@ -79,7 +92,7 @@ namespace Ping_Pong_Yarosh_v1 {
          // Ball
          // 
          this.Ball.BackColor = System.Drawing.Color.White;
-         this.Ball.Location = new System.Drawing.Point(234, 217);
+         this.Ball.Location = new System.Drawing.Point(128, 173);
          this.Ball.Name = "Ball";
          this.Ball.Size = new System.Drawing.Size(30, 30);
          this.Ball.TabIndex = 1;
@@ -87,8 +100,9 @@ namespace Ping_Pong_Yarosh_v1 {
          // 
          // Racket
          // 
+         this.Racket.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
          this.Racket.BackColor = System.Drawing.Color.White;
-         this.Racket.Location = new System.Drawing.Point(54, 401);
+         this.Racket.Location = new System.Drawing.Point(54, 458);
          this.Racket.Name = "Racket";
          this.Racket.Size = new System.Drawing.Size(159, 27);
          this.Racket.TabIndex = 0;
@@ -100,24 +114,16 @@ namespace Ping_Pong_Yarosh_v1 {
          this.timer.Interval = 1;
          this.timer.Tick += new System.EventHandler(this.timer_Tick);
          // 
-         // label1
-         // 
-         this.label1.BackColor = System.Drawing.Color.White;
-         this.label1.Location = new System.Drawing.Point(426, 254);
-         this.label1.Name = "label1";
-         this.label1.Size = new System.Drawing.Size(100, 23);
-         this.label1.TabIndex = 4;
-         this.label1.Text = "label1";
-         // 
          // PracticeGameField
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
-         this.ClientSize = new System.Drawing.Size(800, 450);
+         this.ClientSize = new System.Drawing.Size(931, 530);
          this.Controls.Add(this.Playground);
          this.Name = "PracticeGameField";
          this.Text = "GameField";
+         this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PracticeGameField_FormClosing);
          this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameField_KeyDown);
          this.Playground.ResumeLayout(false);
          ((System.ComponentModel.ISupportInitialize) (this.Ball)).EndInit();
@@ -125,7 +131,7 @@ namespace Ping_Pong_Yarosh_v1 {
          this.ResumeLayout(false);
       }
 
-      private System.Windows.Forms.Label label1;
+      private System.Windows.Forms.Label FinishLabel;
 
       private System.Windows.Forms.Label PauseLabel;
       private System.Windows.Forms.Label ScoreLabel;
