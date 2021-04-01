@@ -16,9 +16,9 @@ namespace Ping_Pong_Yarosh_v1 {
       private PracticeGameField() {
          InitializeComponent();
          FormBorderStyle = FormBorderStyle.None;
-         // TopMost = true; //on top
-         // Bounds = Screen.PrimaryScreen.Bounds; //full screen 
-         Racket.Top = Playground.Bottom - (Playground.Bottom / 10); // racket init pos
+         TopMost = true; //on top
+         Bounds = Screen.PrimaryScreen.Bounds; //full screen 
+         Racket.Top = Playground.Bottom - (Playground.Bottom / 10); //racket init pos
 
          PauseLabel.Left = (Playground.Width - PauseLabel.Width) / 2; //center
          PauseLabel.Top = (Playground.Height - PauseLabel.Height) / 2;
@@ -84,6 +84,7 @@ namespace Ping_Pong_Yarosh_v1 {
 
                break;
             case Keys.F1:
+               SaveScore();
                Ball.Top = Ball.Left = 100;
                _speedLeft = _speedTop = InitSpeed;
                FinishLabel.Visible = false;
@@ -93,7 +94,6 @@ namespace Ping_Pong_Yarosh_v1 {
                timer.Enabled = true;
                break;
             case Keys.F2:
-               SaveScore();
                Close();
                _startMenu.Show();
                break;
@@ -116,8 +116,9 @@ namespace Ping_Pong_Yarosh_v1 {
       private void SaveScore() {
          var input = File.ReadLines(ScoreFilepath).ToList();
          var sw = new StreamWriter(File.Open(ScoreFilepath, FileMode.Append));
-         if (input.Count() == 1){
-            sw.WriteLine($"\n1;{_points};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+         if (input.Count() == 0){
+            sw.WriteLine($"number;score;date");
+            sw.WriteLine($"1;{_points};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
          }
          else{
             var lastCount = int.Parse(input.Last().Split(';')[0]) + 1;
