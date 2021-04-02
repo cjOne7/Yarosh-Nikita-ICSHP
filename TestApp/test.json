@@ -1,0 +1,8 @@
+{
+    "IsMouse": true,
+    "IsKeyboard": false,
+    "KeyboardControl" : {
+        "Right": "d",
+        "Left": "a"
+    }
+}
