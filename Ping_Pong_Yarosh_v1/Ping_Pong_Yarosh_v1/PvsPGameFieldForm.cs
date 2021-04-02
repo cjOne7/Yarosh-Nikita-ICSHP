@@ -99,8 +99,8 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void timer_Tick(object sender, EventArgs e) {
-         // Ball.Left -= _speedLeft;
-         // Ball.Top -= _speedTop;
+         Ball.Left -= _speedLeft;
+         Ball.Top -= _speedTop;
 
          if (Ball.Left <= Playground.Left || Ball.Right >= Playground.Right){
             _speedLeft = -_speedLeft;
