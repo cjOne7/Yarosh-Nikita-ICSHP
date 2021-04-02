@@ -29,12 +29,13 @@
          this.label1 = new System.Windows.Forms.Label();
          this.PvsPBtn = new System.Windows.Forms.Button();
          this.DestroyBlocksBtn = new System.Windows.Forms.Button();
+         this.OptionsBtn = new System.Windows.Forms.Button();
          this.SuspendLayout();
          // 
          // StartPracticeGame
          // 
          this.StartPracticeGame.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
-         this.StartPracticeGame.Location = new System.Drawing.Point(276, 149);
+         this.StartPracticeGame.Location = new System.Drawing.Point(276, 150);
          this.StartPracticeGame.Name = "StartPracticeGame";
          this.StartPracticeGame.Size = new System.Drawing.Size(225, 40);
          this.StartPracticeGame.TabIndex = 0;
@@ -45,7 +46,7 @@
          // ExitBtn
          // 
          this.ExitBtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
-         this.ExitBtn.Location = new System.Drawing.Point(276, 304);
+         this.ExitBtn.Location = new System.Drawing.Point(276, 350);
          this.ExitBtn.Name = "ExitBtn";
          this.ExitBtn.Size = new System.Drawing.Size(225, 40);
          this.ExitBtn.TabIndex = 1;
@@ -57,7 +58,7 @@
          // 
          this.label1.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
          this.label1.ForeColor = System.Drawing.Color.White;
-         this.label1.Location = new System.Drawing.Point(218, 91);
+         this.label1.Location = new System.Drawing.Point(217, 47);
          this.label1.Name = "label1";
          this.label1.Size = new System.Drawing.Size(340, 55);
          this.label1.TabIndex = 2;
@@ -78,7 +79,7 @@
          // DestroyBlocksBtn
          // 
          this.DestroyBlocksBtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
-         this.DestroyBlocksBtn.Location = new System.Drawing.Point(276, 252);
+         this.DestroyBlocksBtn.Location = new System.Drawing.Point(276, 250);
          this.DestroyBlocksBtn.Name = "DestroyBlocksBtn";
          this.DestroyBlocksBtn.Size = new System.Drawing.Size(225, 40);
          this.DestroyBlocksBtn.TabIndex = 4;
@@ -86,12 +87,24 @@
          this.DestroyBlocksBtn.UseVisualStyleBackColor = true;
          this.DestroyBlocksBtn.Click += new System.EventHandler(this.DestroyBlocksBtn_Click);
          // 
+         // OptionsBtn
+         // 
+         this.OptionsBtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+         this.OptionsBtn.Location = new System.Drawing.Point(276, 300);
+         this.OptionsBtn.Name = "OptionsBtn";
+         this.OptionsBtn.Size = new System.Drawing.Size(224, 40);
+         this.OptionsBtn.TabIndex = 5;
+         this.OptionsBtn.Text = "Options";
+         this.OptionsBtn.UseVisualStyleBackColor = true;
+         this.OptionsBtn.Click += new System.EventHandler(this.OptionsBtn_Click);
+         // 
          // StartMenu
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
          this.ClientSize = new System.Drawing.Size(800, 450);
+         this.Controls.Add(this.OptionsBtn);
          this.Controls.Add(this.DestroyBlocksBtn);
          this.Controls.Add(this.PvsPBtn);
          this.Controls.Add(this.label1);
@@ -102,6 +115,8 @@
          this.Text = "Form1";
          this.ResumeLayout(false);
       }
+
+      private System.Windows.Forms.Button OptionsBtn;
 
       private System.Windows.Forms.Button DestroyBlocksBtn;
       private System.Windows.Forms.Button PvsPBtn;

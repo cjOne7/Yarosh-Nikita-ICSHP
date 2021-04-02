@@ -31,5 +31,9 @@ namespace Ping_Pong_Yarosh_v1 {
 
       private void DestroyBlocksBtn_Click(object sender, EventArgs e) {
       }
+
+      private void OptionsBtn_Click(object sender, EventArgs e) {
+         
+      }
    }
 }
