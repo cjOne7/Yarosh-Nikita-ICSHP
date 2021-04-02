@@ -33,6 +33,9 @@ namespace Ping_Pong_Yarosh_v1 {
          this.ConfirmBtn = new System.Windows.Forms.Button();
          this.CancelBtn = new System.Windows.Forms.Button();
          this.ErrorMessLabel = new System.Windows.Forms.Label();
+         this.KeyboardMouseRadioBtn = new System.Windows.Forms.RadioButton();
+         this.KeyboardKeyboardRadioBtn = new System.Windows.Forms.RadioButton();
+         this.label3 = new System.Windows.Forms.Label();
          this.SuspendLayout();
          // 
          // label1
@@ -74,7 +77,7 @@ namespace Ping_Pong_Yarosh_v1 {
          // ConfirmBtn
          // 
          this.ConfirmBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-         this.ConfirmBtn.Location = new System.Drawing.Point(83, 156);
+         this.ConfirmBtn.Location = new System.Drawing.Point(71, 284);
          this.ConfirmBtn.Name = "ConfirmBtn";
          this.ConfirmBtn.Size = new System.Drawing.Size(137, 43);
          this.ConfirmBtn.TabIndex = 4;
@@ -85,7 +88,7 @@ namespace Ping_Pong_Yarosh_v1 {
          // CancelBtn
          // 
          this.CancelBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-         this.CancelBtn.Location = new System.Drawing.Point(279, 156);
+         this.CancelBtn.Location = new System.Drawing.Point(267, 284);
          this.CancelBtn.Name = "CancelBtn";
          this.CancelBtn.Size = new System.Drawing.Size(137, 43);
          this.CancelBtn.TabIndex = 5;
@@ -103,12 +106,50 @@ namespace Ping_Pong_Yarosh_v1 {
          this.ErrorMessLabel.TabIndex = 6;
          this.ErrorMessLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
          // 
+         // KeyboardMouseRadioBtn
+         // 
+         this.KeyboardMouseRadioBtn.Checked = true;
+         this.KeyboardMouseRadioBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+         this.KeyboardMouseRadioBtn.ForeColor = System.Drawing.Color.White;
+         this.KeyboardMouseRadioBtn.Location = new System.Drawing.Point(34, 218);
+         this.KeyboardMouseRadioBtn.Name = "KeyboardMouseRadioBtn";
+         this.KeyboardMouseRadioBtn.Size = new System.Drawing.Size(174, 40);
+         this.KeyboardMouseRadioBtn.TabIndex = 7;
+         this.KeyboardMouseRadioBtn.TabStop = true;
+         this.KeyboardMouseRadioBtn.Text = "AD + Mouse";
+         this.KeyboardMouseRadioBtn.UseVisualStyleBackColor = true;
+         // 
+         // KeyboardKeyboardRadioBtn
+         // 
+         this.KeyboardKeyboardRadioBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+         this.KeyboardKeyboardRadioBtn.ForeColor = System.Drawing.Color.White;
+         this.KeyboardKeyboardRadioBtn.Location = new System.Drawing.Point(258, 218);
+         this.KeyboardKeyboardRadioBtn.Name = "KeyboardKeyboardRadioBtn";
+         this.KeyboardKeyboardRadioBtn.Size = new System.Drawing.Size(154, 40);
+         this.KeyboardKeyboardRadioBtn.TabIndex = 8;
+         this.KeyboardKeyboardRadioBtn.Text = "AD + ← →";
+         this.KeyboardKeyboardRadioBtn.UseVisualStyleBackColor = true;
+         // 
+         // label3
+         // 
+         this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+         this.label3.ForeColor = System.Drawing.Color.White;
+         this.label3.Location = new System.Drawing.Point(119, 177);
+         this.label3.Name = "label3";
+         this.label3.Size = new System.Drawing.Size(247, 23);
+         this.label3.TabIndex = 9;
+         this.label3.Text = "Choose control type";
+         this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         // 
          // EnterPlayersNames
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
-         this.ClientSize = new System.Drawing.Size(491, 211);
+         this.ClientSize = new System.Drawing.Size(491, 362);
+         this.Controls.Add(this.label3);
+         this.Controls.Add(this.KeyboardKeyboardRadioBtn);
+         this.Controls.Add(this.KeyboardMouseRadioBtn);
          this.Controls.Add(this.ErrorMessLabel);
          this.Controls.Add(this.CancelBtn);
          this.Controls.Add(this.ConfirmBtn);
@@ -121,6 +162,11 @@ namespace Ping_Pong_Yarosh_v1 {
          this.ResumeLayout(false);
          this.PerformLayout();
       }
+
+      private System.Windows.Forms.Label label3;
+
+      private System.Windows.Forms.RadioButton KeyboardKeyboardRadioBtn;
+      private System.Windows.Forms.RadioButton KeyboardMouseRadioBtn;
 
       private System.Windows.Forms.Label ErrorMessLabel;
 

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 namespace Ping_Pong_Yarosh_v1 {
    public partial class EnterPlayersNames : Form {
       private readonly StartMenu _startMenu;
+
       public EnterPlayersNames() {
          InitializeComponent();
       }
@@ -16,16 +17,17 @@ namespace Ping_Pong_Yarosh_v1 {
          var playerName1 = PlayersName1.Text.Trim();
          var playerName2 = PlayersName2.Text.Trim();
          if (string.IsNullOrEmpty(playerName1) || string.IsNullOrEmpty(playerName2)){
-            ErrorMessLabel.Text = "Both fields must be filled";
+            ErrorMessLabel.Text = @"Both fields must be filled";
          }
          else{
-            // var gameField = new PracticeGameField(playerName1, playerName2, _startMenu);
-            // _startMenu.Hide();
-            // Close();
-            // gameField.Show();
+            var controlType = KeyboardKeyboardRadioBtn.Checked ? ControlType.KeyboardKeyboard : ControlType.KeyboardMouse;
+            var form = new PvsPGameFieldForm(controlType, _startMenu);
+            form.Show();
+            _startMenu.Hide();
+            Close();
          }
       }
-      
+
       private void CancelBtn_Click(object sender, EventArgs e) {
          Close();
       }

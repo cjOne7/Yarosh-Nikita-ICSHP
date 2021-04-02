@@ -53,6 +53,7 @@ namespace Ping_Pong_Yarosh_v1 {
          this.Playground.TabIndex = 0;
          this.Playground.MouseEnter += new System.EventHandler(this.Playground_MouseEnter);
          this.Playground.MouseLeave += new System.EventHandler(this.Playground_MouseLeave);
+         this.Playground.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Playground_MouseMove);
          // 
          // FinishLabel
          // 
