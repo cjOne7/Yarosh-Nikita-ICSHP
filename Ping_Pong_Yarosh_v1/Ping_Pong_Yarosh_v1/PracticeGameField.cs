@@ -6,9 +6,10 @@ using System.Windows.Forms;
 namespace Ping_Pong_Yarosh_v1 {
    public partial class PracticeGameField : Form {
       private const string ScoreFilepath = "../../../Your relults.txt";
-      private const int InitSpeed = 2;
-      private int _speedLeft = InitSpeed;
-      private int _speedTop = InitSpeed;
+      private const int StartBallSpeed = 2;
+      private const int RacketSpeed = 20;
+      private int _speedLeft = StartBallSpeed;
+      private int _speedTop = StartBallSpeed;
       private int _points;
 
       private readonly StartMenu _startMenu;
@@ -32,18 +33,19 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void timer_Tick(object sender, EventArgs e) {
-         if (Cursor.Position.X - Racket.Width / 2 <= Playground.Left){
-            Racket.Left = Playground.Left;
-         }
-         else if (Cursor.Position.X + Racket.Width / 2 >= Playground.Right){
-            Racket.Left = Playground.Right - Racket.Width;
-         }
-         else{
-            Racket.Left = Cursor.Position.X - Racket.Width / 2;
-         }
+         // if (Cursor.Position.X - Racket.Width / 2 <= Playground.Left){
+         //    Racket.Left = Playground.Left;
+         // }
+         // else if (Cursor.Position.X + Racket.Width / 2 >= Playground.Right){
+         //    Racket.Left = Playground.Right - Racket.Width;
+         // }
+         // else{
+         //    Racket.Left = Cursor.Position.X - Racket.Width / 2;
+         // }
 
-         Ball.Left += _speedLeft;
-         Ball.Top += _speedTop;
+
+         // Ball.Left += _speedLeft;
+         // Ball.Top += _speedTop;
 
          if (Ball.Bottom >= Racket.Top && Ball.Bottom <= Racket.Bottom
                                        && Ball.Left >= Racket.Left && Ball.Right <= Racket.Right){
@@ -86,7 +88,7 @@ namespace Ping_Pong_Yarosh_v1 {
             case Keys.F1:
                SaveScore();
                Ball.Top = Ball.Left = 100;
-               _speedLeft = _speedTop = InitSpeed;
+               _speedLeft = _speedTop = StartBallSpeed;
                FinishLabel.Visible = false;
                _points = 0;
                //todo add event to update it when value has been changed
@@ -96,6 +98,16 @@ namespace Ping_Pong_Yarosh_v1 {
             case Keys.F2:
                Close();
                _startMenu.Show();
+               break;
+            case Keys.A:
+               if (Racket.Left > Playground.Left){
+                  Racket.Left -= RacketSpeed;   
+               }
+               break;
+            case Keys.D:
+               if (Racket.Left <= Playground.Right - Racket.Width){
+                  Racket.Left += RacketSpeed;   
+               }
                break;
          }
       }

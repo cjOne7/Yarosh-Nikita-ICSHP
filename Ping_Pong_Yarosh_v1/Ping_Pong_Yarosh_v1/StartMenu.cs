@@ -33,7 +33,8 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void OptionsBtn_Click(object sender, EventArgs e) {
-         
+         var optionsForm = new OptionsForm();
+         optionsForm.Show();
       }
    }
 }
