@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Windows.Input;
 
 namespace Ping_Pong_Yarosh_v1 {
    public partial class PvsPGameFieldForm : Form {
-      private ControlType _controlType;
       private readonly StartMenu _startMenu;
       private const int StartBallSpeed = 2;
-      private const int RacketSpeed = 20;
+      private int _racketSpeed = 20;
       private int _speedLeft = StartBallSpeed;
       private int _speedTop = StartBallSpeed;
-      private int _points;
+      private int _counter;
+      private ControlType _controlType;
 
       private PvsPGameFieldForm() {
          InitializeComponent();
 
-         // FormBorderStyle = FormBorderStyle.None;
-         // TopMost = true; //on top
+         FormBorderStyle = FormBorderStyle.None;
+         TopMost = true; //on top
          Bounds = Screen.PrimaryScreen.Bounds; //full screen 
+
          Racket1.Top = Playground.Bottom - (Playground.Bottom / 20); //racket1 init pos
-         Racket2.Top = Playground.Top + (Playground.Bottom / 20) - Racket2.Height; //racket2 init pos
+         Racket1.Left = (Playground.Width - Racket1.Width) / 2; //racket1 init pos
+
+         Racket2.Top = Playground.Top + (Playground.Height / 20) - Racket2.Height; //racket2 init pos
+         Racket2.Left = (Playground.Width - Racket2.Width) / 2; //racket2 init pos
 
          PauseLabel.Left = (Playground.Width - PauseLabel.Width) / 2; //center
          PauseLabel.Top = (Playground.Height - PauseLabel.Height) / 2;
@@ -43,20 +46,21 @@ namespace Ping_Pong_Yarosh_v1 {
                Playground.MouseMove += MouseControl_MouseMove;
                break;
          }
+
          timer.Start();
       }
 
       private void KeyboardControl1_KeyDown(object sender, KeyEventArgs e) {
          switch (e.KeyCode){
             case Keys.A:
-               if (Racket1.Left > Playground.Left){
-                  Racket1.Left -= RacketSpeed;
+               if (Racket1.Left >= Playground.Left){
+                  Racket1.Left -= _racketSpeed;
                }
 
                break;
             case Keys.D:
                if (Racket1.Left <= Playground.Right - Racket1.Width){
-                  Racket1.Left += RacketSpeed;
+                  Racket1.Left += _racketSpeed;
                }
 
                break;
@@ -67,13 +71,13 @@ namespace Ping_Pong_Yarosh_v1 {
          switch (e.KeyCode){
             case Keys.Left:
                if (Racket2.Left > Playground.Left){
-                  Racket2.Left -= RacketSpeed;
+                  Racket2.Left -= _racketSpeed;
                }
 
                break;
             case Keys.Right:
                if (Racket2.Left <= Playground.Right - Racket2.Width){
-                  Racket2.Left += RacketSpeed;
+                  Racket2.Left += _racketSpeed;
                }
 
                break;
@@ -95,9 +99,43 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void timer_Tick(object sender, EventArgs e) {
+         // Ball.Left -= _speedLeft;
+         // Ball.Top -= _speedTop;
+
          if (Ball.Left <= Playground.Left || Ball.Right >= Playground.Right){
             _speedLeft = -_speedLeft;
          }
+
+         if (Ball.Top <= Racket2.Bottom && Ball.Top >= Racket2.Top
+                                        && Ball.Left >= Racket2.Left && Ball.Right <= Racket2.Right){
+            _speedLeft = _speedLeft < 0 ? _speedLeft - 1 : _speedLeft + 1;
+            _speedTop = _speedTop < 0 ? _speedTop - 1 : _speedTop + 1;
+
+            _speedTop = -_speedTop;
+         }
+
+         if (Ball.Bottom >= Racket1.Top && Ball.Bottom <= Racket1.Bottom
+                                        && Ball.Left >= Racket1.Left && Ball.Right <= Racket1.Right){
+            _speedLeft = _speedLeft < 0 ? _speedLeft - 1 : _speedLeft + 1;
+            _speedTop = _speedTop < 0 ? _speedTop - 1 : _speedTop + 1;
+
+            if (_controlType == ControlType.KeyboardMouse){//boost
+               _racketSpeed += 3; 
+               Racket1.Width += 10;
+            }
+
+            _speedTop = -_speedTop;
+         }
+
+         if (Ball.Bottom >= Playground.Bottom || Ball.Top <= Playground.Top){
+            timer.Enabled = false;
+            FinishLabel.Visible = true;
+         }
+
+         // if (Ball.Top <= Playground.Top){
+         //    timer.Enabled = false;
+         //    FinishLabel.Visible = true;
+         // }
       }
 
       private void PvsPGameFieldForm_KeyDown(object sender, KeyEventArgs e) {
@@ -120,7 +158,6 @@ namespace Ping_Pong_Yarosh_v1 {
                Ball.Top = Ball.Left = 100;
                _speedLeft = _speedTop = StartBallSpeed;
                FinishLabel.Visible = false;
-               _points = 0;
                //todo add event to update it when value has been changed
                // ScoreLabel.Text = @"Score: 0";
                timer.Enabled = true;
