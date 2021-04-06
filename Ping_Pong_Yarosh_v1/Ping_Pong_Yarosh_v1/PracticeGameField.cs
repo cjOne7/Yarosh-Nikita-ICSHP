@@ -27,7 +27,7 @@ namespace Ping_Pong_Yarosh_v1 {
          Centralized(FinishLabel);
          Centralized(PauseLabel);
       }
-      
+
       public PracticeGameField(StartMenu startMenu) : this() {
          _startMenu = startMenu;
          var input = File.ReadAllText(OptionsFilePath);
@@ -149,17 +149,16 @@ namespace Ping_Pong_Yarosh_v1 {
 
       private void SaveScore() {
          var input = File.ReadLines(ScoreFilepath).ToList();
-         var sw = new StreamWriter(File.Open(ScoreFilepath, FileMode.Append));
-         if (input.Count() == 0){
-            sw.WriteLine($"number;score;date");
-            sw.WriteLine($"1;{_points};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+         using (var sw = new StreamWriter(File.Open(ScoreFilepath, FileMode.Append))){
+            if (input.Count() == 0){
+               sw.WriteLine("game_id;score;date");
+               sw.WriteLine($"1;{_points};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            }
+            else{
+               var incrementGameId = int.Parse(input.Last().Split(';')[0]) + 1;
+               sw.WriteLine($"{incrementGameId};{_points};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            }
          }
-         else{
-            var lastCount = int.Parse(input.Last().Split(';')[0]) + 1;
-            sw.WriteLine($"{lastCount};{_points};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-         }
-
-         sw.Close();
       }
 
       private void Centralized(Control controlObject) {

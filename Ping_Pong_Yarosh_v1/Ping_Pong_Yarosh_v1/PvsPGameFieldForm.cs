@@ -1,8 +1,11 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Ping_Pong_Yarosh_v1 {
    public partial class PvsPGameFieldForm : Form {
+      private const string PvPScorePath = "../../../PvP.csv";
       private readonly StartMenu _startMenu;
       private const int StartBallSpeed = 2;
       private int _racketSpeed = 20;
@@ -13,6 +16,7 @@ namespace Ping_Pong_Yarosh_v1 {
 
       private readonly string _playerName1;
       private readonly string _playerName2;
+      private string _winner;
 
       private PvsPGameFieldForm() {
          InitializeComponent();
@@ -134,16 +138,19 @@ namespace Ping_Pong_Yarosh_v1 {
          }
 
          if (Ball.Top <= Playground.Top){
-            timer.Enabled = false;
-            FinishLabel.Visible = true;
-            FinishLabel.Text = $"Game over\nPlayer {_playerName1} wins\nF1 - restart\nF2 - exit";
+            StopGame(_playerName1);
          }
 
          if (Ball.Bottom >= Playground.Bottom){
-            timer.Enabled = false;
-            FinishLabel.Visible = true;
-            FinishLabel.Text = $"Game over\nPlayer {_playerName2} wins\nF1 - restart\nF2 - exit";
+            StopGame(_playerName2);
          }
+      }
+
+      private void StopGame(string winner) {
+         timer.Enabled = false;
+         FinishLabel.Visible = true;
+         FinishLabel.Text = $"Game over\nPlayer {winner} wins\nF1 - restart\nF2 - exit";
+         _winner = winner;
       }
 
       private void Centralized(Control controlObject) {
@@ -167,7 +174,6 @@ namespace Ping_Pong_Yarosh_v1 {
 
                break;
             case Keys.F1:
-               // SaveScore();
                Ball.Top = Ball.Left = 100;
                _speedLeft = _speedTop = StartBallSpeed;
                FinishLabel.Visible = false;
@@ -190,7 +196,22 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void PvsPGameFieldForm_FormClosing(object sender, FormClosingEventArgs e) {
+         SaveScore();
          _startMenu.Show();
+      }
+
+      private void SaveScore() {
+         var input = File.ReadLines(PvPScorePath).ToList();
+         using (var sw = new StreamWriter(File.Open(PvPScorePath, FileMode.Append))){
+            if (input.Count() == 0){
+               sw.WriteLine("game_id;player1;player2;winner;date");
+               sw.WriteLine($"1;{_playerName1};{_playerName2};{_winner};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            }
+            else{
+               var incrementGameId = int.Parse(input.Last().Split(';')[0]) + 1;
+               sw.WriteLine($"{incrementGameId};{_playerName1};{_playerName2};{_winner};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            }
+         }
       }
    }
 }
