@@ -1,10 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Windows.Forms;
 
 namespace Ping_Pong_Yarosh_v1 {
    public partial class PracticeGameField : Form {
+      private readonly Options _options;
+      private const string OptionsFilePath = "../../../Options.json";
       private const string ScoreFilepath = "../../../Your relults.txt";
       private const int StartBallSpeed = 2;
       private const int RacketSpeed = 20;
@@ -21,15 +24,51 @@ namespace Ping_Pong_Yarosh_v1 {
          Bounds = Screen.PrimaryScreen.Bounds; //full screen 
          Racket.Top = Playground.Bottom - (Playground.Bottom / 10); //racket init pos
 
-         PauseLabel.Left = (Playground.Width - PauseLabel.Width) / 2; //center
-         PauseLabel.Top = (Playground.Height - PauseLabel.Height) / 2;
-
-         FinishLabel.Left = (Playground.Width - FinishLabel.Width) / 2; //center
-         FinishLabel.Top = (Playground.Height - FinishLabel.Height) / 2;
+         Centralized(FinishLabel);
+         Centralized(PauseLabel);
       }
-
+      
       public PracticeGameField(StartMenu startMenu) : this() {
          _startMenu = startMenu;
+         var input = File.ReadAllText(OptionsFilePath);
+         _options = JsonSerializer.Deserialize<Options>(input);
+         if (_options.IsMouse == _options.IsKeyboard){
+            throw new ArgumentException("You can't use mouse and keyboard simultaneously.");
+         }
+
+         if (_options.IsMouse){
+            Playground.MouseMove += Playground_MouseMove;
+         }
+      }
+
+      private void RacketMoving_KeyDown(object sender, KeyEventArgs e) {
+         var left = (Keys) Enum.Parse(typeof(Keys), _options.KeyboardControl.Left.ToUpper());
+         var right = (Keys) Enum.Parse(typeof(Keys), _options.KeyboardControl.Right.ToUpper());
+         if (e.KeyCode == left){
+            if (Racket.Left > Playground.Left){
+               Racket.Left -= RacketSpeed;
+            }
+         }
+
+         if (e.KeyCode == right){
+            if (Racket.Left <= Playground.Right - Racket.Width){
+               Racket.Left += RacketSpeed;
+            }
+         }
+      }
+
+      private void Playground_MouseMove(object sender, MouseEventArgs e) {
+         if (timer.Enabled){
+            if (Cursor.Position.X - Racket.Width / 2 <= Playground.Left){
+               Racket.Left = Playground.Left;
+            }
+            else if (Cursor.Position.X + Racket.Width / 2 >= Playground.Right){
+               Racket.Left = Playground.Right - Racket.Width;
+            }
+            else{
+               Racket.Left = Cursor.Position.X - Racket.Width / 2;
+            }
+         }
       }
 
       private void timer_Tick(object sender, EventArgs e) {
@@ -88,16 +127,10 @@ namespace Ping_Pong_Yarosh_v1 {
                Close();
                _startMenu.Show();
                break;
-            case Keys.A:
-               if (Racket.Left > Playground.Left){
-                  Racket.Left -= RacketSpeed;   
-               }
-               break;
-            case Keys.D:
-               if (Racket.Left <= Playground.Right - Racket.Width){
-                  Racket.Left += RacketSpeed;   
-               }
-               break;
+         }
+
+         if (_options.IsKeyboard){
+            RacketMoving_KeyDown(sender, e);
          }
       }
 
@@ -129,18 +162,9 @@ namespace Ping_Pong_Yarosh_v1 {
          sw.Close();
       }
 
-      private void Playground_MouseMove(object sender, MouseEventArgs e) {
-         if (timer.Enabled){
-            if (Cursor.Position.X - Racket.Width / 2 <= Playground.Left){
-               Racket.Left = Playground.Left;
-            }
-            else if (Cursor.Position.X + Racket.Width / 2 >= Playground.Right){
-               Racket.Left = Playground.Right - Racket.Width;
-            }
-            else{
-               Racket.Left = Cursor.Position.X - Racket.Width / 2;
-            }     
-         }
+      private void Centralized(Control controlObject) {
+         controlObject.Left = (Playground.Width - controlObject.Width) / 2; //center
+         controlObject.Top = (Playground.Height - controlObject.Height) / 2;
       }
    }
 }

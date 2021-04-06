@@ -27,9 +27,9 @@ namespace Ping_Pong_Yarosh_v1 {
          Racket2.Top = Playground.Top + (Playground.Height / 20) - Racket2.Height; //racket2 init pos
          Racket2.Left = (Playground.Width - Racket2.Width) / 2; //racket2 init pos
 
-         Centrilize(Ball);
-         Centrilize(PauseLabel);
-         Centrilize(FinishLabel);
+         Centralized(Ball);
+         Centralized(PauseLabel);
+         Centralized(FinishLabel);
       }
 
       public PvsPGameFieldForm(ControlType controlType, StartMenu startMenu
@@ -146,7 +146,7 @@ namespace Ping_Pong_Yarosh_v1 {
          }
       }
 
-      private void Centrilize(Control controlObject) {
+      private void Centralized(Control controlObject) {
          controlObject.Left = (Playground.Width - controlObject.Width) / 2; //center
          controlObject.Top = (Playground.Height - controlObject.Height) / 2;
       }
@@ -172,7 +172,7 @@ namespace Ping_Pong_Yarosh_v1 {
                _speedLeft = _speedTop = StartBallSpeed;
                FinishLabel.Visible = false;
                timer.Enabled = true;
-               Centrilize(Ball);
+               Centralized(Ball);
                break;
             case Keys.F2:
                Close();
