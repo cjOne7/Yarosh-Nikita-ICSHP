@@ -122,7 +122,7 @@ namespace Ping_Pong_Yarosh_v1 {
 
             if (_controlType == ControlType.KeyboardMouse){ //boost
                _racketSpeed += 3;
-               Racket1.Width += 10;
+               Racket1.Width += 15;
             }
 
             _speedTop = -_speedTop;
