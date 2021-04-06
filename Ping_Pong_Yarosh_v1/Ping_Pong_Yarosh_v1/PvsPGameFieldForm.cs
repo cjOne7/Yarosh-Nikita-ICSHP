@@ -11,6 +11,9 @@ namespace Ping_Pong_Yarosh_v1 {
       private int _counter;
       private ControlType _controlType;
 
+      private readonly string _playerName1;
+      private readonly string _playerName2;
+
       private PvsPGameFieldForm() {
          InitializeComponent();
 
@@ -24,17 +27,15 @@ namespace Ping_Pong_Yarosh_v1 {
          Racket2.Top = Playground.Top + (Playground.Height / 20) - Racket2.Height; //racket2 init pos
          Racket2.Left = (Playground.Width - Racket2.Width) / 2; //racket2 init pos
 
-         PauseLabel.Left = (Playground.Width - PauseLabel.Width) / 2; //center
-         PauseLabel.Top = (Playground.Height - PauseLabel.Height) / 2;
-
-         FinishLabel.Left = (Playground.Width - FinishLabel.Width) / 2; //center
-         FinishLabel.Top = (Playground.Height - FinishLabel.Height) / 2;
-
-         Ball.Left = (Playground.Width - Ball.Width) / 2; //center
-         Ball.Top = (Playground.Height - Ball.Height) / 2;
+         Centrilize(Ball);
+         Centrilize(PauseLabel);
+         Centrilize(FinishLabel);
       }
 
-      public PvsPGameFieldForm(ControlType controlType, StartMenu startMenu) : this() {
+      public PvsPGameFieldForm(ControlType controlType, StartMenu startMenu
+         , string playerName1, string playerName2) : this() {
+         _playerName1 = playerName1;
+         _playerName2 = playerName2;
          _controlType = controlType;
          _startMenu = startMenu;
          KeyDown += KeyboardControl1_KeyDown;
@@ -119,8 +120,8 @@ namespace Ping_Pong_Yarosh_v1 {
             _speedLeft = _speedLeft < 0 ? _speedLeft - 1 : _speedLeft + 1;
             _speedTop = _speedTop < 0 ? _speedTop - 1 : _speedTop + 1;
 
-            if (_controlType == ControlType.KeyboardMouse){//boost
-               _racketSpeed += 3; 
+            if (_controlType == ControlType.KeyboardMouse){ //boost
+               _racketSpeed += 3;
                Racket1.Width += 10;
             }
 
@@ -132,10 +133,22 @@ namespace Ping_Pong_Yarosh_v1 {
             FinishLabel.Visible = true;
          }
 
-         // if (Ball.Top <= Playground.Top){
-         //    timer.Enabled = false;
-         //    FinishLabel.Visible = true;
-         // }
+         if (Ball.Top <= Playground.Top){
+            timer.Enabled = false;
+            FinishLabel.Visible = true;
+            FinishLabel.Text = $"Game over\nPlayer {_playerName1} wins\nF1 - restart\nF2 - exit";
+         }
+
+         if (Ball.Bottom >= Playground.Bottom){
+            timer.Enabled = false;
+            FinishLabel.Visible = true;
+            FinishLabel.Text = $"Game over\nPlayer {_playerName2} wins\nF1 - restart\nF2 - exit";
+         }
+      }
+
+      private void Centrilize(Control controlObject) {
+         controlObject.Left = (Playground.Width - controlObject.Width) / 2; //center
+         controlObject.Top = (Playground.Height - controlObject.Height) / 2;
       }
 
       private void PvsPGameFieldForm_KeyDown(object sender, KeyEventArgs e) {
@@ -158,9 +171,8 @@ namespace Ping_Pong_Yarosh_v1 {
                Ball.Top = Ball.Left = 100;
                _speedLeft = _speedTop = StartBallSpeed;
                FinishLabel.Visible = false;
-               //todo add event to update it when value has been changed
-               // ScoreLabel.Text = @"Score: 0";
                timer.Enabled = true;
+               Centrilize(Ball);
                break;
             case Keys.F2:
                Close();

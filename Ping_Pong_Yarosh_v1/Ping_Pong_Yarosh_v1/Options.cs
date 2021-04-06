@@ -1,8 +1,8 @@
-﻿﻿namespace TestApp {
+﻿namespace Ping_Pong_Yarosh_v1 {
    public class Options {
-      public bool IsMouse { get; }
-      public bool IsKeyboard { get; }
-      public KeyboardControl KeyboardControl { get; }
+      public bool IsMouse { get; set; }
+      public bool IsKeyboard { get; set; }
+      public KeyboardControl KeyboardControl { get; set; }
 
       public Options(bool isMouse, bool isKeyboard, KeyboardControl keyboardControl) {
          IsMouse = isMouse;

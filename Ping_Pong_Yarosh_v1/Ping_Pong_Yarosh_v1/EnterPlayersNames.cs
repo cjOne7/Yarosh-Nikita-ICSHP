@@ -5,7 +5,7 @@ namespace Ping_Pong_Yarosh_v1 {
    public partial class EnterPlayersNames : Form {
       private readonly StartMenu _startMenu;
 
-      public EnterPlayersNames() {
+      private EnterPlayersNames() {
          InitializeComponent();
       }
 
@@ -21,7 +21,7 @@ namespace Ping_Pong_Yarosh_v1 {
          }
          else{
             var controlType = KeyboardKeyboardRadioBtn.Checked ? ControlType.KeyboardKeyboard : ControlType.KeyboardMouse;
-            var form = new PvsPGameFieldForm(controlType, _startMenu);
+            var form = new PvsPGameFieldForm(controlType, _startMenu, playerName1, playerName2);
             form.Show();
             _startMenu.Hide();
             Close();

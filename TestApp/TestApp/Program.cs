@@ -43,6 +43,10 @@ namespace TestApp {
          var input = File.ReadAllText("../../../test.json");
          var result = JsonSerializer.Deserialize<Options>(input);
          Console.WriteLine(result);
+
+         var options = new Options(false, true, new KeyboardControl("←", "→"));
+         var json = JsonSerializer.Serialize(options);
+         File.WriteAllText("../../../test.json", json);
       }
    }
 }

@@ -80,9 +80,9 @@ namespace Ping_Pong_Yarosh_v1 {
          // 
          this.FinishLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
          this.FinishLabel.ForeColor = System.Drawing.Color.White;
-         this.FinishLabel.Location = new System.Drawing.Point(348, 119);
+         this.FinishLabel.Location = new System.Drawing.Point(272, 119);
          this.FinishLabel.Name = "FinishLabel";
-         this.FinishLabel.Size = new System.Drawing.Size(261, 197);
+         this.FinishLabel.Size = new System.Drawing.Size(373, 197);
          this.FinishLabel.TabIndex = 5;
          this.FinishLabel.Text = "Game over\r\nF1 - restart\r\nF2 - exit\r\n";
          this.FinishLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

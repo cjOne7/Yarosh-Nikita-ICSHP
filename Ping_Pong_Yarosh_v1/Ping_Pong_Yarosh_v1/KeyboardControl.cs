@@ -1,7 +1,7 @@
-﻿﻿namespace TestApp {
+﻿namespace Ping_Pong_Yarosh_v1 {
    public class KeyboardControl {
-      public string Left { get; }
-      public string Right { get; }
+      public string Left { get; set; }
+      public string Right { get; set; }
 
       public KeyboardControl(string left, string right) {
          Left = left;

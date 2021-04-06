@@ -61,27 +61,23 @@ namespace Ping_Pong_Yarosh_v1 {
          // 
          // MouseRadioBtn
          // 
-         this.MouseRadioBtn.Checked = true;
          this.MouseRadioBtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
          this.MouseRadioBtn.ForeColor = System.Drawing.Color.White;
          this.MouseRadioBtn.Location = new System.Drawing.Point(124, 54);
          this.MouseRadioBtn.Name = "MouseRadioBtn";
          this.MouseRadioBtn.Size = new System.Drawing.Size(118, 40);
          this.MouseRadioBtn.TabIndex = 3;
-         this.MouseRadioBtn.TabStop = true;
          this.MouseRadioBtn.Text = "Mouse";
          this.MouseRadioBtn.UseVisualStyleBackColor = true;
          this.MouseRadioBtn.CheckedChanged += new System.EventHandler(this.MouseRadioBtn_CheckedChanged);
          // 
          // MovingLeftTextBox
          // 
-         this.MovingLeftTextBox.Enabled = false;
          this.MovingLeftTextBox.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
          this.MovingLeftTextBox.Location = new System.Drawing.Point(167, 179);
          this.MovingLeftTextBox.Name = "MovingLeftTextBox";
          this.MovingLeftTextBox.Size = new System.Drawing.Size(161, 36);
          this.MovingLeftTextBox.TabIndex = 4;
-         this.MovingLeftTextBox.Text = "A";
          this.MovingLeftTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
          // 
          // KeyboardRadioBtn
@@ -118,13 +114,11 @@ namespace Ping_Pong_Yarosh_v1 {
          // 
          // MovingRightTextBox
          // 
-         this.MovingRightTextBox.Enabled = false;
          this.MovingRightTextBox.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
          this.MovingRightTextBox.Location = new System.Drawing.Point(167, 254);
          this.MovingRightTextBox.Name = "MovingRightTextBox";
          this.MovingRightTextBox.Size = new System.Drawing.Size(161, 36);
          this.MovingRightTextBox.TabIndex = 9;
-         this.MovingRightTextBox.Text = "D";
          this.MovingRightTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
          // 
          // CancelBtn
