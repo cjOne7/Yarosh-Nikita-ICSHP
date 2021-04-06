@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 
-namespace TestApp {
-   public class LinkedList : IList {
+namespace Ping_Pong_Yarosh_v1 {
+   public class LinkedList<T> : IList<T> {
       private Node _head;
       private Node _tail;
 
@@ -11,16 +12,17 @@ namespace TestApp {
          return Count == 0 && _head == null && _tail == null;
       }
 
-      public IEnumerator GetEnumerator() {
+      public IEnumerator<T> GetEnumerator() {
          return new Enumerator(this);
       }
 
-      public int Add(object value) {
-         if (value == null){
-            return -1;
-         }
+      IEnumerator IEnumerable.GetEnumerator() {
+         return GetEnumerator();
+      }
 
-         var node = new Node(value, null, _tail);
+      public void Add(T item) {
+         CheckForNull(item);
+         var node = new Node(item, null, _tail);
          if (IsEmpty()){
             _head = node;
             _tail = _head;
@@ -29,12 +31,6 @@ namespace TestApp {
             _tail.Next = node;
             _tail = node;
          }
-
-         return Count++;
-      }
-
-      public bool Contains(object value) {
-         return IndexOf(value) != -1;
       }
 
       public void Clear() {
@@ -42,12 +38,34 @@ namespace TestApp {
          Count = 0;
       }
 
-      public int IndexOf(object value) {
-         CheckForNull(value);
+      public bool Contains(T item) {
+         return IndexOf(item) != -1;
+      }
+
+      public void CopyTo(T[] array, int arrayIndex) {
+         CheckForNull(array);
+         CheckIndex(arrayIndex);
+         for (var i = 0; i < Count; i++){
+            array.SetValue(this[arrayIndex], arrayIndex++);
+         }
+      }
+
+      public bool Remove(T item) {
+         var index = IndexOf(item);
+         if (index < 0){
+            return false;
+         }
+
+         RemoveAt(index);
+         return true;
+      }
+
+      public int IndexOf(T item) {
+         CheckForNull(item);
          var node = _head;
          var i = 0;
          while (node != null){
-            if (node.Data.Equals(value)){
+            if (node.Data.Equals(item)){
                return i;
             }
 
@@ -58,11 +76,11 @@ namespace TestApp {
          return i == Count ? -1 : i;
       }
 
-      public void Insert(int index, object value) {
-         CheckForNull(value);
+      public void Insert(int index, T item) {
+         CheckForNull(item);
          CheckIndex(index);
          if (index == Count - 1){
-            Add(value);
+            Add(item);
          }
          else{
             var i = 0;
@@ -71,16 +89,12 @@ namespace TestApp {
                node = node.Next;
             }
 
-            var newNode = new Node(value, node.Next, node);
+            var newNode = new Node(item, node.Next, node);
             var nextNode = node.Next;
             nextNode.Prev = newNode;
             node.Next = newNode;
             Count++;
          }
-      }
-
-      public void Remove(object value) {
-         RemoveAt(IndexOf(value));
       }
 
       public void RemoveAt(int index) {
@@ -129,18 +143,10 @@ namespace TestApp {
          _tail.Next = null;
       }
 
-      public void CopyTo(Array array, int index) {
-         CheckForNull(array);
-         CheckIndex(index);
-         for (var i = 0; i < Count; i++){
-            array.SetValue(this[index], index++);
-         }
-      }
-
-      public object this[int index] {
+      public T this[int index] {
          get {
             if (IsEmpty()){
-               return null;
+               throw new EvaluateException("Empty list.");
             }
 
             CheckIndex(index);
@@ -155,24 +161,20 @@ namespace TestApp {
          set => Insert(index, value);
       }
 
+      public int Count { get; private set; }
+      public bool IsReadOnly { get; }
+
       private class Node {
-         public object Data { get; }
+         public T Data { get; }
          public Node Next { get; set; }
          public Node Prev { get; set; }
 
-         public Node(object data, Node next, Node prev) {
+         public Node(T data, Node next, Node prev) {
             Data = data;
             Next = next;
             Prev = prev;
          }
       }
-
-      public int Count { get; private set; }
-
-      public object SyncRoot => this;
-      public bool IsReadOnly { get; } = false;
-      public bool IsFixedSize { get; } = false;
-      public bool IsSynchronized { get; } = false;
 
       private static void CheckForNull(object value) {
          if (value == null){
@@ -186,15 +188,20 @@ namespace TestApp {
          }
       }
 
-      private class Enumerator : IEnumerator {
-         private readonly LinkedList _list;
+      private class Enumerator : IEnumerator<T> {
+         private readonly LinkedList<T> _list;
          private int _index;
 
-         public Enumerator(LinkedList list) {
+         T IEnumerator<T>.Current { get; }
+
+         public object Current { get; private set; }
+
+         public Enumerator(LinkedList<T> list) {
             _list = list;
             _index = 0;
             Current = list[_index];
          }
+
 
          public bool MoveNext() {
             if (_index >= _list.Count){
@@ -210,7 +217,7 @@ namespace TestApp {
             Current = _list[_index];
          }
 
-         public object Current { get; private set; }
+         public void Dispose() { }
       }
    }
 }

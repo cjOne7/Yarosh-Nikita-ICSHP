@@ -23,6 +23,7 @@ namespace TestApp {
          // linkedList.Add(3);
          // linkedList.Insert(1, 1000);
          // linkedList[linkedList.Count - 1] = 200;
+         // Console.WriteLine(linkedList.Contains(210));
          // // linkedList.Remove(1);
          // // var enumerator = linkedList.GetEnumerator();
          // // while (enumerator.MoveNext()){
@@ -40,13 +41,13 @@ namespace TestApp {
          // //    Console.WriteLine(linkedList[i]);
          // // }
 
-         var input = File.ReadAllText("../../../test.json");
-         var result = JsonSerializer.Deserialize<Options>(input);
-         Console.WriteLine(result);
-
-         var options = new Options(false, true, new KeyboardControl("←", "→"));
-         var json = JsonSerializer.Serialize(options);
-         File.WriteAllText("../../../test.json", json);
+         // var input = File.ReadAllText("../../../test.json");
+         // var result = JsonSerializer.Deserialize<Options>(input);
+         // Console.WriteLine(result);
+         //
+         // var options = new Options(false, true, new KeyboardControl("←", "→"));
+         // var json = JsonSerializer.Serialize(options);
+         // File.WriteAllText("../../../test.json", json);
       }
    }
 }
