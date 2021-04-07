@@ -1,14 +1,14 @@
 ﻿using System;
 
 namespace Ping_Pong_Yarosh_v1 {
-   public class PvPScore {
+   public class PvPGame {
       public int GameId { get; set; }
       public string Player1 { get; set; }
       public string Player2 { get; set; }
       public string Winner { get; set; }
       public DateTime DateTime { get; set; }
 
-      public PvPScore(int gameId, string player1, string player2, string winner, DateTime dateTime) {
+      public PvPGame(int gameId, string player1, string player2, string winner, DateTime dateTime) {
          GameId = gameId;
          Player1 = player1;
          Player2 = player2;
