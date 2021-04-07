@@ -36,13 +36,6 @@ namespace Ping_Pong_Yarosh_v1 {
          var optionsForm = new OptionsForm();
          optionsForm.Show();
       }
-      
-      
-      
-      
-      
-      
-      
 
       private void ResultsBoardBtn_Click(object sender, EventArgs e) {
          var form = new ResultsForm(this);

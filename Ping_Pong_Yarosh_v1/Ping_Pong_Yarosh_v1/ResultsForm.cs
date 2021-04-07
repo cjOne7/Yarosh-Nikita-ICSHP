@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Ping_Pong_Yarosh_v1 {
@@ -10,7 +13,8 @@ namespace Ping_Pong_Yarosh_v1 {
 
       private ResultsForm() {
          InitializeComponent();
-         GameTypeChooser.DataSource = Enum.GetValues(typeof(GameType));
+         // GameTypeChooser.DataSource = Enum.GetValues(typeof(GameType));
+         GameTypeChooser.Items.AddRange(Enum.GetNames(typeof(GameType)));
          ParsePractices();
          ParsePvP();
       }
@@ -47,6 +51,34 @@ namespace Ping_Pong_Yarosh_v1 {
 
       private void ResultsForm_FormClosing(object sender, FormClosingEventArgs e) {
          _startMenu.Show();
+      }
+
+      private static string GetListAsString<T>(IList<T> list) {
+         var builder = new StringBuilder();
+         for (var i = list.Count - 1; i >= 0; i--){
+            builder.Append(list[i]).Append("\r\n");
+         }
+
+         return builder.ToString();
+      }
+
+      private void GameTypeChooser_SelectedIndexChanged(object sender, EventArgs e) {
+         if (GameTypeChooser.Text == GameType.PvP.ToString()){
+            ResultsBoardTextBox.Text = GetListAsString(_pvPGames);
+            BestScoreLable.Text = "";
+         }
+         else if (GameTypeChooser.Text == GameType.Practice.ToString()){
+            ResultsBoardTextBox.Text = GetListAsString(_selfPractices);
+            BestScoreLable.Text = GetBestScore();
+         }
+         else if (GameTypeChooser.Text == GameType.DestroyBlocks.ToString()){
+            //todo just do it
+         }
+      }
+
+      private string GetBestScore() {
+         var max = _selfPractices.Select(practice => practice.Score).Max();
+         return $"Your best score is {max}.";
       }
    }
 }

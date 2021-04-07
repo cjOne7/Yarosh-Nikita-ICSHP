@@ -31,6 +31,8 @@ namespace Ping_Pong_Yarosh_v1 {
             _tail.Next = node;
             _tail = node;
          }
+
+         Count++;
       }
 
       public void Clear() {
@@ -192,7 +194,7 @@ namespace Ping_Pong_Yarosh_v1 {
          private readonly LinkedList<T> _list;
          private int _index;
 
-         T IEnumerator<T>.Current { get; }
+         T IEnumerator<T>.Current => (T) Current;
 
          public object Current { get; private set; }
 
@@ -201,7 +203,6 @@ namespace Ping_Pong_Yarosh_v1 {
             _index = 0;
             Current = list[_index];
          }
-
 
          public bool MoveNext() {
             if (_index >= _list.Count){
