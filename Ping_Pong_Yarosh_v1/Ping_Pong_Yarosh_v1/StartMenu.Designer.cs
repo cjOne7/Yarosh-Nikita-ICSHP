@@ -30,12 +30,13 @@
          this.PvsPBtn = new System.Windows.Forms.Button();
          this.DestroyBlocksBtn = new System.Windows.Forms.Button();
          this.OptionsBtn = new System.Windows.Forms.Button();
+         this.ResultsBoardBtn = new System.Windows.Forms.Button();
          this.SuspendLayout();
          // 
          // StartPracticeGame
          // 
          this.StartPracticeGame.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
-         this.StartPracticeGame.Location = new System.Drawing.Point(276, 150);
+         this.StartPracticeGame.Location = new System.Drawing.Point(276, 100);
          this.StartPracticeGame.Name = "StartPracticeGame";
          this.StartPracticeGame.Size = new System.Drawing.Size(225, 40);
          this.StartPracticeGame.TabIndex = 0;
@@ -68,7 +69,7 @@
          // PvsPBtn
          // 
          this.PvsPBtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
-         this.PvsPBtn.Location = new System.Drawing.Point(276, 200);
+         this.PvsPBtn.Location = new System.Drawing.Point(276, 150);
          this.PvsPBtn.Name = "PvsPBtn";
          this.PvsPBtn.Size = new System.Drawing.Size(225, 40);
          this.PvsPBtn.TabIndex = 3;
@@ -79,7 +80,7 @@
          // DestroyBlocksBtn
          // 
          this.DestroyBlocksBtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
-         this.DestroyBlocksBtn.Location = new System.Drawing.Point(276, 250);
+         this.DestroyBlocksBtn.Location = new System.Drawing.Point(276, 200);
          this.DestroyBlocksBtn.Name = "DestroyBlocksBtn";
          this.DestroyBlocksBtn.Size = new System.Drawing.Size(225, 40);
          this.DestroyBlocksBtn.TabIndex = 4;
@@ -98,12 +99,24 @@
          this.OptionsBtn.UseVisualStyleBackColor = true;
          this.OptionsBtn.Click += new System.EventHandler(this.OptionsBtn_Click);
          // 
+         // ResultsBoardBtn
+         // 
+         this.ResultsBoardBtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+         this.ResultsBoardBtn.Location = new System.Drawing.Point(275, 250);
+         this.ResultsBoardBtn.Name = "ResultsBoardBtn";
+         this.ResultsBoardBtn.Size = new System.Drawing.Size(225, 40);
+         this.ResultsBoardBtn.TabIndex = 6;
+         this.ResultsBoardBtn.Text = "Results board";
+         this.ResultsBoardBtn.UseVisualStyleBackColor = true;
+         this.ResultsBoardBtn.Click += new System.EventHandler(this.ResultsBoardBtn_Click);
+         // 
          // StartMenu
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
          this.ClientSize = new System.Drawing.Size(800, 450);
+         this.Controls.Add(this.ResultsBoardBtn);
          this.Controls.Add(this.OptionsBtn);
          this.Controls.Add(this.DestroyBlocksBtn);
          this.Controls.Add(this.PvsPBtn);
@@ -115,6 +128,8 @@
          this.Text = "Form1";
          this.ResumeLayout(false);
       }
+
+      private System.Windows.Forms.Button ResultsBoardBtn;
 
       private System.Windows.Forms.Button OptionsBtn;
 
