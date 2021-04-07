@@ -4,9 +4,6 @@ using System.Windows.Forms;
 namespace Ping_Pong_Yarosh_v1 {
    public partial class ResultsForm : Form {
       private readonly StartMenu _startMenu;
-      private const string PracticeScoreFilepath = "../../../Your relults.txt";
-      private const string PvPScorePath = "../../../PvP.csv";
-      
 
       private ResultsForm() {
          InitializeComponent();

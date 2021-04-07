@@ -5,14 +5,12 @@ using System.Windows.Forms;
 
 namespace Ping_Pong_Yarosh_v1 {
    public partial class PvsPGameFieldForm : Form {
-      private const string PvPScorePath = "../../../PvP.csv";
       private readonly StartMenu _startMenu;
       private const int StartBallSpeed = 2;
       private int _racketSpeed = 20;
       private int _speedLeft = StartBallSpeed;
       private int _speedTop = StartBallSpeed;
-      private int _counter;
-      private ControlType _controlType;
+      private readonly ControlType _controlType;
 
       private readonly string _playerName1;
       private readonly string _playerName2;
@@ -201,8 +199,8 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void SaveScore() {
-         var input = File.ReadLines(PvPScorePath).ToList();
-         using (var sw = new StreamWriter(File.Open(PvPScorePath, FileMode.Append))){
+         var input = File.ReadLines(Files.PvPScorePath).ToList();
+         using (var sw = new StreamWriter(File.Open(Files.PvPScorePath, FileMode.Append))){
             if (input.Count() == 0){
                sw.WriteLine("game_id;player1;player2;winner;date");
                sw.WriteLine($"1;{_playerName1};{_playerName2};{_winner};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");

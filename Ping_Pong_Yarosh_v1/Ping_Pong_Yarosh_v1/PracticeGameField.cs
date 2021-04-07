@@ -7,8 +7,6 @@ using System.Windows.Forms;
 namespace Ping_Pong_Yarosh_v1 {
    public partial class PracticeGameField : Form {
       private readonly Options _options;
-      private const string OptionsFilePath = "../../../Options.json";
-      private const string ScoreFilepath = "../../../Your relults.txt";
       private const int StartBallSpeed = 2;
       private const int RacketSpeed = 20;
       private int _speedLeft = StartBallSpeed;
@@ -30,7 +28,7 @@ namespace Ping_Pong_Yarosh_v1 {
 
       public PracticeGameField(StartMenu startMenu) : this() {
          _startMenu = startMenu;
-         var input = File.ReadAllText(OptionsFilePath);
+         var input = File.ReadAllText(Files.OptionsFilePath);
          _options = JsonSerializer.Deserialize<Options>(input);
          if (_options.IsMouse == _options.IsKeyboard){
             throw new ArgumentException("You can't use mouse and keyboard simultaneously.");
@@ -148,8 +146,8 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void SaveScore() {
-         var input = File.ReadLines(ScoreFilepath).ToList();
-         using (var sw = new StreamWriter(File.Open(ScoreFilepath, FileMode.Append))){
+         var input = File.ReadLines(Files.PracticeScoreFilepath).ToList();
+         using (var sw = new StreamWriter(File.Open(Files.PracticeScoreFilepath, FileMode.Append))){
             if (input.Count() == 0){
                sw.WriteLine("game_id;score;date");
                sw.WriteLine($"1;{_points};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");

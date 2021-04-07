@@ -7,11 +7,10 @@ using System.Windows.Forms;
 namespace Ping_Pong_Yarosh_v1 {
    public partial class OptionsForm : Form {
       private readonly Options _options;
-      private const string FilePath = "../../../Options.json";
 
       public OptionsForm() {
          InitializeComponent();
-         var input = File.ReadAllText(FilePath);
+         var input = File.ReadAllText(Files.OptionsFilePath);
          _options = JsonSerializer.Deserialize<Options>(input);
          if (_options.IsMouse == _options.IsKeyboard){
             throw new ArgumentException("You can't use mouse and keyboard simultaneously.");
@@ -37,7 +36,7 @@ namespace Ping_Pong_Yarosh_v1 {
             _options.KeyboardControl.Left = MovingLeftTextBox.Text;
             _options.KeyboardControl.Right = MovingRightTextBox.Text;
             var json = JsonSerializer.Serialize(_options);
-            File.WriteAllText(FilePath, json);
+            File.WriteAllText(Files.OptionsFilePath, json);
             Close();
          }
       }
