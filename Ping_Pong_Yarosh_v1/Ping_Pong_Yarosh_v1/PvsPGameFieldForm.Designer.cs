@@ -62,7 +62,7 @@ namespace Ping_Pong_Yarosh_v1 {
          this.Racket2.BackColor = System.Drawing.Color.White;
          this.Racket2.Location = new System.Drawing.Point(249, 483);
          this.Racket2.Name = "Racket2";
-         this.Racket2.Size = new System.Drawing.Size(159, 27);
+         this.Racket2.Size = new System.Drawing.Size(160, 27);
          this.Racket2.TabIndex = 6;
          this.Racket2.TabStop = false;
          // 
@@ -72,7 +72,7 @@ namespace Ping_Pong_Yarosh_v1 {
          this.Racket1.BackColor = System.Drawing.Color.White;
          this.Racket1.Location = new System.Drawing.Point(68, 483);
          this.Racket1.Name = "Racket1";
-         this.Racket1.Size = new System.Drawing.Size(159, 27);
+         this.Racket1.Size = new System.Drawing.Size(160, 27);
          this.Racket1.TabIndex = 1;
          this.Racket1.TabStop = false;
          // 

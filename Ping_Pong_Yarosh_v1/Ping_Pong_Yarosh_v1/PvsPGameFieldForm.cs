@@ -40,10 +40,12 @@ namespace Ping_Pong_Yarosh_v1 {
          _playerName2 = playerName2;
          _controlType = controlType;
          _startMenu = startMenu;
+
          KeyDown += KeyboardControl1_KeyDown;
          switch (controlType){
             case ControlType.KeyboardKeyboard:
                KeyUp += KeyboardControl2_KeyUp;
+               Racket1.Width = Racket2.Width = 200;
                break;
             case ControlType.KeyboardMouse:
                Playground.MouseMove += MouseControl_MouseMove;
@@ -123,8 +125,8 @@ namespace Ping_Pong_Yarosh_v1 {
             _speedTop = _speedTop < 0 ? _speedTop - 1 : _speedTop + 1;
 
             if (_controlType == ControlType.KeyboardMouse){ //boost
-               _racketSpeed += 3;
-               Racket1.Width += 15;
+               _racketSpeed += 5;
+               Racket1.Width += 30;
             }
 
             _speedTop = -_speedTop;
@@ -207,7 +209,8 @@ namespace Ping_Pong_Yarosh_v1 {
             }
             else{
                var incrementGameId = int.Parse(input.Last().Split(';')[0]) + 1;
-               sw.WriteLine($"{incrementGameId};{_playerName1};{_playerName2};{_winner};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+               sw.WriteLine(
+                  $"{incrementGameId};{_playerName1};{_playerName2};{_winner};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
             }
          }
       }

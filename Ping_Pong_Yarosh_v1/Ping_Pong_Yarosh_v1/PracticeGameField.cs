@@ -17,6 +17,7 @@ namespace Ping_Pong_Yarosh_v1 {
 
       private PracticeGameField() {
          InitializeComponent();
+         Cursor.Hide();
          FormBorderStyle = FormBorderStyle.None;
          TopMost = true; //on top
          Bounds = Screen.PrimaryScreen.Bounds; //full screen 
