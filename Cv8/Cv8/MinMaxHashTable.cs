@@ -21,15 +21,29 @@ namespace Cv8 {
          Array = new Node<K, V>[_initialSize];
       }
 
-      private int GetPosition(K key, int length) {
+      private int GetPosition(K key) {
          var hash = key.GetHashCode();
-         var pos = Math.Abs(hash % length);
+         var pos = Math.Abs(hash % _initialSize);
          return pos;
       }
 
       public void Add(K key, V value) {
          if (Contains(key)){
             throw new ArgumentException($"Key '{key}' exists");
+         }
+
+         var valueNode = new Node<K, V>(key, value, null);
+         var pos = GetPosition(key);
+         var node = Array[pos];
+         if (node == null){
+            Array[pos] = node;
+         }
+         else{
+            while (node.Next != null){
+               node = node.Next;
+            }
+
+            node.Next = valueNode;
          }
 
          Count++;
@@ -65,6 +79,12 @@ namespace Cv8 {
          public K Key { get; set; }
          public V Value { get; set; }
          public Node<K, V> Next { get; set; }
+
+         public Node(K key, V value, Node<K, V> next) {
+            Key = key;
+            Value = value;
+            Next = next;
+         }
 
          public Node(int hash, K key, V value, Node<K, V> next) {
             Hash = hash;
