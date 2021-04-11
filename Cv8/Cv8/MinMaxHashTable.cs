@@ -12,13 +12,28 @@ namespace Cv8 {
 
       Hashtable _hashtable = new Hashtable();
 
-      public MinMaxHashTable() { }
+      public MinMaxHashTable() {
+         Array = new Node<K, V>[_initialSize];
+      }
 
       public MinMaxHashTable(int newSize) {
          _initialSize = newSize;
+         Array = new Node<K, V>[_initialSize];
       }
 
-      public void Add(K key, V value) { }
+      private int GetPosition(K key, int length) {
+         var hash = key.GetHashCode();
+         var pos = Math.Abs(hash % length);
+         return pos;
+      }
+
+      public void Add(K key, V value) {
+         if (Contains(key)){
+            throw new ArgumentException($"Key '{key}' exists");
+         }
+
+         Count++;
+      }
 
       public bool Contains(K key) {
          return false;
