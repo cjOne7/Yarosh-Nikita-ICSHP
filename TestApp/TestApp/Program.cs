@@ -48,14 +48,11 @@ namespace TestApp {
          // var options = new Options(false, true, new KeyboardControl("←", "→"));
          // var json = JsonSerializer.Serialize(options);
          // File.WriteAllText("../../../test.json", json);
-         
-         var linkedList = new LinkedList<int>();
-         linkedList.Add(10);
-         linkedList.Add(20);
-         linkedList.Add(30);
+
+         var linkedList = new LinkedList<int> {10, 20, 30};
          var enumerator = linkedList.GetEnumerator();
          while (enumerator.MoveNext()){
-            int o = enumerator.Current;
+            var o = enumerator.Current;
             Console.WriteLine(o);
          }
       }
