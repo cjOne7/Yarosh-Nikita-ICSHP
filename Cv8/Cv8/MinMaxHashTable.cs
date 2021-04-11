@@ -32,20 +32,20 @@ namespace Cv8 {
          throw new NotImplementedException();
       }
 
-      public IEnumerable<Node<K, V>> Range(K min, K max) {
+      public IEnumerable<KeyValuePair<K, V>> Range(K min, K max) {
          throw new NotImplementedException();
       }
 
-      public IEnumerable<Node<K, V>> SortedRange(K min, K max) {
+      public IEnumerable<KeyValuePair<K, V>> SortedRange(K min, K max) {
          throw new NotImplementedException();
       }
 
-      public IEnumerator<Node<K, V>> this[K min, K max] {
+      public IEnumerator<KeyValuePair<K, V>> this[K min, K max] {
          get => throw new NotImplementedException();
          set => throw new NotImplementedException();
       }
 
-      public class Node<K, V> {
+      private class Node<K, V> {
          public int Hash { get; set; }
          public K Key { get; set; }
          public V Value { get; set; }
