@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Cv8 {
    public class MinMaxHashTable<K, V> {
-      private int _initialSize = 20;
+      private readonly int _initialSize = 20;
       public K Min { get; set; }
       public K Max { get; set; }
       public int Count { get; set; }
@@ -25,12 +25,15 @@ namespace Cv8 {
       }
 
       public void Add(K key, V value) {
-         CheckKeyForNull(key);
-         CheckKeyForNull(value);
+         if (Count == _initialSize){
+            throw new ArgumentException("Hashmap is full");
+         }
+
          if (Contains(key)){
             throw new ArgumentException($"Key '{key}' exists");
          }
 
+         CheckObjectForNull(value);
          var valueNode = new Node<K, V>(key, value, null);
          var pos = GetPosition(key);
          var node = Array[pos];
@@ -43,6 +46,20 @@ namespace Cv8 {
             }
 
             node.Next = valueNode;
+         }
+
+
+         if (Count == 0){
+            Min = Max = key;
+         }
+         else{
+            if (valueNode.CompareTo(Min) < 0){
+               Min = key;
+            }
+
+            if (valueNode.CompareTo(Max) > 0){
+               Max = key;
+            }
          }
 
          Count++;
@@ -59,7 +76,7 @@ namespace Cv8 {
       }
 
       public V Get(K key) {
-         CheckKeyForNull(key);
+         CheckObjectForNull(key);
          var pos = GetPosition(key);
          var node = Array[pos];
          while (node != null){
@@ -74,7 +91,7 @@ namespace Cv8 {
       }
 
       public V Remove(K key) {
-         CheckKeyForNull(key);
+         CheckObjectForNull(key);
          var pos = GetPosition(key);
          var temp = Array[pos];
          if (temp.Key.Equals(key)){
@@ -136,12 +153,12 @@ namespace Cv8 {
             Next = next;
          }
 
-         public int CompareTo(K other) {
-            return Comparer<K>.Default.Compare(Key, other);
+         public int CompareTo(K otherKey) {
+            return Comparer<K>.Default.Compare(Key, otherKey);
          }
       }
 
-      private static void CheckKeyForNull(object value) {
+      private static void CheckObjectForNull(object value) {
          if (value == null){
             throw new ArgumentException("Value is null");
          }

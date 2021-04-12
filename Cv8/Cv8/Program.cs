@@ -11,6 +11,7 @@ namespace Cv8 {
          table.Add(70, 70);
          table.Add(40, 40);
          // Console.WriteLine(table.Remove(40));
+         Console.WriteLine($"Min: {table.Min}, max: {table.Max}.");
          
          var enumerator = table.SortedRange(10, 50);
          // var enumerator = table[10, 50];
