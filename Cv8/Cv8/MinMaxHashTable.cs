@@ -20,6 +20,7 @@ namespace Cv8 {
       }
 
       private int GetPosition(K key) {
+         CheckObjectForNull(key);
          var hash = key.GetHashCode();
          return Math.Abs(hash % _initialSize);
       }
@@ -76,7 +77,6 @@ namespace Cv8 {
       }
 
       public V Get(K key) {
-         CheckObjectForNull(key);
          var pos = GetPosition(key);
          var node = Array[pos];
          while (node != null){
@@ -91,7 +91,6 @@ namespace Cv8 {
       }
 
       public V Remove(K key) {
-         CheckObjectForNull(key);
          var pos = GetPosition(key);
          var temp = Array[pos];
          if (temp.Key.Equals(key)){
