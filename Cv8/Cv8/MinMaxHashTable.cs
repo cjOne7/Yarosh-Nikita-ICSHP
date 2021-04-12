@@ -28,6 +28,8 @@ namespace Cv8 {
       }
 
       public void Add(K key, V value) {
+         CheckKeyForNull(key);
+         CheckKeyForNull(value);
          if (Contains(key)){
             throw new ArgumentException($"Key '{key}' exists");
          }
@@ -36,7 +38,7 @@ namespace Cv8 {
          var pos = GetPosition(key);
          var node = Array[pos];
          if (node == null){
-            Array[pos] = node;
+            Array[pos] = valueNode;
          }
          else{
             while (node.Next != null){
@@ -50,14 +52,45 @@ namespace Cv8 {
       }
 
       public bool Contains(K key) {
-         return false;
+         try{
+            Get(key);
+            return true;
+         }
+         catch (KeyNotFoundException){
+            return false;
+         }
       }
 
       public V Get(K key) {
-         throw new NotImplementedException();
+         CheckKeyForNull(key);
+         var pos = GetPosition(key);
+         var node = Array[pos];
+         while (node != null){
+            if (node.Key.Equals(key)){
+               return node.Value;
+            }
+
+            node = node.Next;
+         }
+
+         throw new KeyNotFoundException($"Key {key} is not found.");
       }
 
       public V Remove(K key) {
+         CheckKeyForNull(key);
+         if (!Contains(key)){
+            throw new KeyNotFoundException($"Key {key} is not found."); 
+         }
+         var pos = GetPosition(key);
+         var temp = Array[pos];
+         
+         
+         Node<K, V> prev = null;
+         
+         while (temp != null && !Equals(temp.Next.Key, key)){
+            temp = temp.Next;
+         }
+         
          throw new NotImplementedException();
       }
 
@@ -91,6 +124,12 @@ namespace Cv8 {
             Key = key;
             Value = value;
             Next = next;
+         }
+      }
+
+      private void CheckKeyForNull(object value) {
+         if (value == null){
+            throw new ArgumentException("Value is null");
          }
       }
    }
