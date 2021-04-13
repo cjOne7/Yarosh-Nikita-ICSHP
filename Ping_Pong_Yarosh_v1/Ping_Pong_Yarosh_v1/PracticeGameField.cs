@@ -161,7 +161,7 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void Centralized(Control controlObject) {
-         controlObject.Left = (Playground.Width - controlObject.Width) / 2; //center
+         controlObject.Left = (Playground.Width - controlObject.Width) / 2;
          controlObject.Top = (Playground.Height - controlObject.Height) / 2;
       }
    }

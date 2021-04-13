@@ -55,6 +55,7 @@ namespace Ping_Pong_Yarosh_v1 {
          timer.Start();
       }
 
+      //todo stop moving p2 after loosing
       private void KeyboardControl1_KeyDown(object sender, KeyEventArgs e) {
          switch (e.KeyCode){
             case Keys.A:

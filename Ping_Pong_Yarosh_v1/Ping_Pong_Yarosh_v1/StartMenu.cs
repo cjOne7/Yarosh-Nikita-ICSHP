@@ -15,7 +15,7 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void startNewGame_Click(object sender, EventArgs e) {
-         var practiceGameField = new PracticeGameField(this);  
+         var practiceGameField = new PracticeGameField(this);
          practiceGameField.Show();
          Hide();
       }
@@ -30,6 +30,9 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void DestroyBlocksBtn_Click(object sender, EventArgs e) {
+         // var destroyBlocksForm = new DestroyBlocksForm(this);
+         // destroyBlocksForm.Show();
+         Hide();
       }
 
       private void OptionsBtn_Click(object sender, EventArgs e) {
