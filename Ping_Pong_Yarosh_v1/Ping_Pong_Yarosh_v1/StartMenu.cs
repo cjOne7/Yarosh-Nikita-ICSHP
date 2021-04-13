@@ -30,8 +30,8 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void DestroyBlocksBtn_Click(object sender, EventArgs e) {
-         // var destroyBlocksForm = new DestroyBlocksForm(this);
-         // destroyBlocksForm.Show();
+         var destroyBlocksForm = new DestroyBlocksForm(this);
+         destroyBlocksForm.Show();
          Hide();
       }
 
