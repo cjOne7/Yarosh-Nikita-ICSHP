@@ -42,7 +42,6 @@ namespace Ping_Pong_Yarosh_v1 {
          this.Ball = new System.Windows.Forms.PictureBox();
          this.Racket = new System.Windows.Forms.PictureBox();
          this.timer = new System.Windows.Forms.Timer(this.components);
-         this.label1 = new System.Windows.Forms.Label();
          this.Playground.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize) (this.pictureBox8)).BeginInit();
          ((System.ComponentModel.ISupportInitialize) (this.pictureBox7)).BeginInit();
@@ -58,7 +57,6 @@ namespace Ping_Pong_Yarosh_v1 {
          // 
          // Playground
          // 
-         this.Playground.Controls.Add(this.label1);
          this.Playground.Controls.Add(this.pictureBox8);
          this.Playground.Controls.Add(this.pictureBox7);
          this.Playground.Controls.Add(this.pictureBox6);
@@ -228,15 +226,6 @@ namespace Ping_Pong_Yarosh_v1 {
          this.timer.Interval = 1;
          this.timer.Tick += new System.EventHandler(this.timer_Tick);
          // 
-         // label1
-         // 
-         this.label1.ForeColor = System.Drawing.Color.White;
-         this.label1.Location = new System.Drawing.Point(287, 422);
-         this.label1.Name = "label1";
-         this.label1.Size = new System.Drawing.Size(75, 29);
-         this.label1.TabIndex = 16;
-         this.label1.Text = "label1";
-         // 
          // DestroyBlocksForm
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -261,8 +250,6 @@ namespace Ping_Pong_Yarosh_v1 {
          ((System.ComponentModel.ISupportInitialize) (this.Racket)).EndInit();
          this.ResumeLayout(false);
       }
-
-      private System.Windows.Forms.Label label1;
 
       private System.Windows.Forms.PictureBox pictureBox1;
       private System.Windows.Forms.PictureBox pictureBox2;

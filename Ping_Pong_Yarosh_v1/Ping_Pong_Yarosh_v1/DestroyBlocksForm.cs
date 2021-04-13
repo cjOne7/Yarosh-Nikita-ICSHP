@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Windows.Forms;
 
@@ -11,13 +14,20 @@ namespace Ping_Pong_Yarosh_v1 {
       private int _speedLeft = StartBallSpeed;
       private int _speedTop = StartBallSpeed;
       private int _points;
+      private List<Control> _initBlocks = new List<Control>();
 
       private readonly StartMenu _startMenu;
 
       private DestroyBlocksForm() {
          InitializeComponent();
 
-         TopMost = true; //on top
+         foreach (Control control in Playground.Controls){
+            if (control is PictureBox && (string) control.Tag == "blocks"){
+               _initBlocks.Add(control);
+            }
+         }
+
+         // TopMost = true; //on top
          Centralized(FinishLabel);
          Centralized(PauseLabel);
          Centralized(Ball);
@@ -32,7 +42,6 @@ namespace Ping_Pong_Yarosh_v1 {
          if (_options.IsMouse == _options.IsKeyboard){
             throw new ArgumentException("You can't use mouse and keyboard simultaneously.");
          }
-
          if (_options.IsMouse){
             Playground.MouseMove += Playground_MouseMove;
          }
@@ -56,24 +65,25 @@ namespace Ping_Pong_Yarosh_v1 {
 
       private void Playground_MouseMove(object sender, MouseEventArgs e) {
          if (timer.Enabled){
-            if (Cursor.Position.X - Racket.Width / 2 <= Playground.Left){
+            if (Cursor.Position.X - Left - Racket.Width / 2 <= Playground.Left){
                Racket.Left = Playground.Left;
             }
-            else if (Cursor.Position.X + Racket.Width / 2 >= Playground.Right){
+            else if (Cursor.Position.X - Left + Racket.Width / 2 >= Playground.Right){
                Racket.Left = Playground.Right - Racket.Width;
             }
             else{
-               Racket.Left = Cursor.Position.X - Racket.Width / 2;
+               Racket.Left = Cursor.Position.X - Left - Racket.Width / 2;
             }
          }
       }
 
       private void timer_Tick(object sender, EventArgs e) {
-         // Ball.Left += _speedLeft;
-         // Ball.Top += _speedTop;
+         ScoreLabel.Text = $@"Score: {_points}";
 
-         if (Ball.Bottom >= Racket.Top && Ball.Bottom <= Racket.Bottom
-                                       && Ball.Left >= Racket.Left && Ball.Right <= Racket.Right){
+         Ball.Left += _speedLeft;
+         Ball.Top += _speedTop;
+
+         if (Ball.Bounds.IntersectsWith(Racket.Bounds)){
             _speedTop = -_speedTop;
             ScoreLabel.Text = $@"Score: {_points}";
          }
@@ -90,13 +100,13 @@ namespace Ping_Pong_Yarosh_v1 {
             if (control is PictureBox && (string) control.Tag == "blocks"){
                if (Ball.Bounds.IntersectsWith(control.Bounds)){
                   _points++;
-                  ScoreLabel.Text = $@"Score: {_points}";
+                  _speedTop = -_speedTop;
                   Playground.Controls.Remove(control);
                }
             }
          }
 
-         if (Ball.Bottom >= Playground.Bottom){
+         if (Ball.Bottom >= Playground.Bottom || _points == 8){
             timer.Enabled = false;
             FinishLabel.Visible = true;
          }
@@ -109,20 +119,19 @@ namespace Ping_Pong_Yarosh_v1 {
                PauseLabel.Visible = !PauseLabel.Visible;
                if (timer.Enabled){
                   Cursor.Hide();
-                  // FormBorderStyle = FormBorderStyle.None;
                }
                else{
                   Cursor.Show();
-                  // FormBorderStyle = FormBorderStyle.Sizable;
                }
 
                break;
             case Keys.F1:
-               Ball.Top = Ball.Left = 100;
+               Centralized(Ball);
                _speedLeft = _speedTop = StartBallSpeed;
                FinishLabel.Visible = false;
                _points = 0;
-               ScoreLabel.Text = @"Score: 0";
+               ScoreLabel.Text = $@"Score: {_points}";
+               Playground.Controls.AddRange(_initBlocks.ToArray());
                timer.Enabled = true;
                break;
             case Keys.F2:
@@ -137,21 +146,31 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void DestroyBlocksForm_FormClosing(object sender, FormClosingEventArgs e) {
+         SaveScore();
          _startMenu.Show();
       }
 
       private void Playground_MouseEnter(object sender, EventArgs e) { }
 
-      private void Playground_MouseLeave(object sender, EventArgs e) {
-         // if (Cursor.Position.X < Playground.Left){
-         //    var position = Cursor.Position;
-         //    position.X = Playground.Left;
-         // }
-      }
+      private void Playground_MouseLeave(object sender, EventArgs e) { }
 
       private void Centralized(Control controlObject) {
          controlObject.Left = (Playground.Width - controlObject.Width) / 2;
          controlObject.Top = (Playground.Height - controlObject.Height) / 2;
+      }
+
+      private void SaveScore() {
+         var input = File.ReadLines(Files.DestroyBlocksFilePath).ToList();
+         using (var sw = new StreamWriter(File.Open(Files.DestroyBlocksFilePath, FileMode.Append))){
+            if (input.Count() == 0){
+               sw.WriteLine("game_id;score;date");
+               sw.WriteLine($"1;{_points};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            }
+            else{
+               var incrementGameId = int.Parse(input.Last().Split(';')[0]) + 1;
+               sw.WriteLine($"{incrementGameId};{_points};{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            }
+         }
       }
    }
 }
