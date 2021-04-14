@@ -69,29 +69,6 @@ namespace Cv7 {
       }
 
       private byte[] DecodePcxScanLine() {
-         // var index = 0;
-         // var buffer = new byte[_scanLineLength];
-         // while (index < _scanLineLength){
-         //    var b = _binaryReader.ReadByte();
-         //    int runCount;
-         //    byte runValue;
-         //    if ((b & 0xC0) == 0xC0){
-         //       runCount = b & 0x3F;
-         //       runValue = _binaryReader.ReadByte();
-         //    }
-         //    else{
-         //       runCount = 1;
-         //       runValue = b;
-         //    }
-         //
-         //    while (runCount > 0 && index < _scanLineLength){
-         //       buffer[index++] = runValue;
-         //       runCount--;
-         //    }
-         // }
-         //
-         // return buffer;
-
          var index = 0;
          var buffer = new byte[_scanLineLength];
          do{
@@ -120,8 +97,7 @@ namespace Cv7 {
             for (var i = 0; i < _scanLineLength - 1; i++){
                var b = bytes[i];
                var pos = _binaryReader.BaseStream.Position;
-               _binaryReader.BaseStream.Seek(-768, SeekOrigin.End);
-               _binaryReader.BaseStream.Seek(b * 3, SeekOrigin.Current);
+               _binaryReader.BaseStream.Seek(-768, SeekOrigin.End);//2^8*3
                var color = Color.FromArgb(
                   _binaryReader.ReadByte(), _binaryReader.ReadByte(), _binaryReader.ReadByte());
                _binaryReader.BaseStream.Position = pos;
