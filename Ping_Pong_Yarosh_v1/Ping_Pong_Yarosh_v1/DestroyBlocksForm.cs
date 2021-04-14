@@ -26,13 +26,12 @@ namespace Ping_Pong_Yarosh_v1 {
                _initBlocks.Add(control);
             }
          }
-
+         Cursor.Hide();
          // TopMost = true; //on top
          Centralized(FinishLabel);
          Centralized(PauseLabel);
          Centralized(Ball);
          Racket.Top = Playground.Bottom - (Playground.Bottom / 10); //racket init pos
-         // Cursor.Hide();
       }
 
       public DestroyBlocksForm(StartMenu startMenu) : this() {
@@ -42,6 +41,7 @@ namespace Ping_Pong_Yarosh_v1 {
          if (_options.IsMouse == _options.IsKeyboard){
             throw new ArgumentException("You can't use mouse and keyboard simultaneously.");
          }
+
          if (_options.IsMouse){
             Playground.MouseMove += Playground_MouseMove;
          }
@@ -150,9 +150,13 @@ namespace Ping_Pong_Yarosh_v1 {
          _startMenu.Show();
       }
 
-      private void Playground_MouseEnter(object sender, EventArgs e) { }
+      private void Playground_MouseEnter(object sender, EventArgs e) {
+         Cursor.Hide();
+      }
 
-      private void Playground_MouseLeave(object sender, EventArgs e) { }
+      private void Playground_MouseLeave(object sender, EventArgs e) {
+         Cursor.Show();
+      }
 
       private void Centralized(Control controlObject) {
          controlObject.Left = (Playground.Width - controlObject.Width) / 2;

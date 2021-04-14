@@ -9,25 +9,27 @@ namespace Ping_Pong_Yarosh_v1 {
    public partial class ResultsForm : Form {
       private readonly StartMenu _startMenu;
       private readonly LinkedList<SelfPractice> _selfPractices = new LinkedList<SelfPractice>();
+      private readonly LinkedList<SelfPractice> _destroyBlocks = new LinkedList<SelfPractice>();
       private readonly LinkedList<PvPGame> _pvPGames = new LinkedList<PvPGame>();
 
       private ResultsForm() {
          InitializeComponent();
          // GameTypeChooser.DataSource = Enum.GetValues(typeof(GameType));
          GameTypeChooser.Items.AddRange(Enum.GetNames(typeof(GameType)));
-         ParsePractices();
+         ParsePractices(Files.PracticeScoreFilepath, _selfPractices);
+         ParsePractices(Files.DestroyBlocksFilePath, _destroyBlocks);
          ParsePvP();
       }
 
-      private void ParsePractices() {
-         var practiceScores = File.ReadAllLines(Files.PracticeScoreFilepath);
+      private void ParsePractices(string filepath, LinkedList<SelfPractice> list) {
+         var practiceScores = File.ReadAllLines(filepath);
          for (var i = 1; i < practiceScores.Length; i++){
             var splittedRow = practiceScores[i].Split(';');
             var id = int.Parse(splittedRow[0]);
             var score = int.Parse(splittedRow[1]);
             var dateTime = DateTime.Parse(splittedRow[2]);
             var practice = new SelfPractice(id, score, dateTime);
-            _selfPractices.Add(practice);
+            list.Add(practice);
          }
       }
 
@@ -72,7 +74,8 @@ namespace Ping_Pong_Yarosh_v1 {
             BestScoreLable.Text = GetBestScore();
          }
          else if (GameTypeChooser.Text == GameType.DestroyBlocks.ToString()){
-            //todo just do it
+            ResultsBoardTextBox.Text = GetListAsString(_destroyBlocks);
+            BestScoreLable.Text = "";
          }
       }
 
