@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -8,8 +9,6 @@ using System.Windows.Forms;
 namespace Cv7 {
    ///source http://netghost.narod.ru/gff/graphics/summary/pcx.htm
    public partial class Form1 : Form {
-      private const int HeaderLength = 128;
-
       private int _imageWidth;
       private int _imageHeight;
       private int _numBitPlanes;
@@ -27,45 +26,21 @@ namespace Cv7 {
             if (openFileDialog.ShowDialog() == DialogResult.OK){
                _binaryReader = new BinaryReader(openFileDialog.OpenFile());
                ReadPcxHeader();
-               // var bitmap = LoadPCX(fileName);
-               // PCXImage.Width = bitmap.Width;
-               // PCXImage.Height = bitmap.Height;
-               // PCXImage.Image = bitmap;
+               var bitmap = new Bitmap(_imageWidth, _imageHeight);
+               for (var j = 0; j < _imageHeight; j++){
+                  var bytes = DecodePcxScanLine();
+                  SetPixels(bytes, bitmap, j);
+               }
+
+               PCXImage.Width = bitmap.Width;
+               PCXImage.Height = bitmap.Height;
+               PCXImage.Image = bitmap;
             }
          }
 
          _binaryReader.Close();
       }
 
-      private Bitmap LoadPCX() {
-         return null;
-      }
-
-      /// <summary>
-      /// The first 128 bytes of every PCX file is the header, which has the following format:
-      /// typedef struct _PcxHeader
-      /// {
-      ///   BYTE  Identifier;        /* PCX Id Number (Always 0x0A) */
-      ///   BYTE  Version;           /* Version Number */
-      ///   BYTE  Encoding;          /* Encoding Format */
-      ///   BYTE  BitsPerPixel;      /* Bits per Pixel */
-      ///   WORD  XStart;            /* Left of image */
-      ///   WORD  YStart;            /* Top of Image */
-      ///   WORD  XEnd;              /* Right of Image
-      ///   WORD  YEnd;              /* Bottom of image */
-      ///   WORD  HorzRes;           /* Horizontal Resolution */
-      ///   WORD  VertRes;           /* Vertical Resolution */
-      ///   BYTE  Palette[48];       /* 16-Color EGA Palette */
-      ///   BYTE  Reserved1;         /* Reserved (Always 0) */
-      ///   BYTE  NumBitPlanes;      /* Number of Bit Planes */
-      ///   WORD  BytesPerLine;      /* Bytes per Scan-line */
-      ///   WORD  PaletteType;       /* Palette Type */
-      ///   WORD  HorzScreenSize;    /* Horizontal Screen Size */
-      ///   WORD  VertScreenSize;    /* Vertical Screen Size */
-      ///   BYTE  Reserved2[54];     /* Reserved (Always 0) */
-      ///   } PCXHEAD;
-      ///   Total: 1+1+1+1+2+2+2+2+2+2+48+1+1+2+2+2+2+54 = 128
-      /// </summary>
       private void ReadPcxHeader() {
          //skip Identifier, Version, Encoding, BitsPerPixel
          SkipBytes(1, 1, 1, 1);
@@ -91,6 +66,76 @@ namespace Cv7 {
 
       private void SkipBytes(params int[] bytes) {
          _binaryReader.BaseStream.Seek(bytes.Sum(), SeekOrigin.Current);
+      }
+
+      private byte[] DecodePcxScanLine() {
+         // var index = 0;
+         // var buffer = new byte[_scanLineLength];
+         // while (index < _scanLineLength){
+         //    var b = _binaryReader.ReadByte();
+         //    int runCount;
+         //    byte runValue;
+         //    if ((b & 0xC0) == 0xC0){
+         //       runCount = b & 0x3F;
+         //       runValue = _binaryReader.ReadByte();
+         //    }
+         //    else{
+         //       runCount = 1;
+         //       runValue = b;
+         //    }
+         //
+         //    while (runCount > 0 && index < _scanLineLength){
+         //       buffer[index++] = runValue;
+         //       runCount--;
+         //    }
+         // }
+         //
+         // return buffer;
+
+         var index = 0;
+         var buffer = new byte[_scanLineLength];
+         do{
+            var b = _binaryReader.ReadByte();
+            int runCount;
+            byte runValue;
+            if ((b & 0xC0) == 0xC0){ /* 2-byte code */
+               runCount = b & 0x3F; /* Get run count */
+               runValue = _binaryReader.ReadByte(); /* Get pixel value */
+            }
+            else /* 1-byte code */{
+               runCount = 1; /* Run count is one */
+               runValue = b; /* Pixel value */
+            }
+
+            while (runCount-- != 0 && index < _scanLineLength){
+               buffer[index++] = runValue;
+            }
+         } while (index < _scanLineLength);
+
+         return buffer;
+      }
+
+      private void SetPixels(IReadOnlyList<byte> bytes, Bitmap bitmap, int j) {
+         if (_numBitPlanes == 1){
+            for (var i = 0; i < _scanLineLength - 1; i++){
+               var b = bytes[i];
+               var pos = _binaryReader.BaseStream.Position;
+               _binaryReader.BaseStream.Seek(-768, SeekOrigin.End);
+               _binaryReader.BaseStream.Seek(b * 3, SeekOrigin.Current);
+               var color = Color.FromArgb(
+                  _binaryReader.ReadByte(), _binaryReader.ReadByte(), _binaryReader.ReadByte());
+               _binaryReader.BaseStream.Position = pos;
+               bitmap.SetPixel(i, j, color);
+            }
+         }
+         else{
+            for (var i = 0; i < (_scanLineLength - 1) / 3; i++){
+               var color = Color.FromArgb(bytes[i]
+                  , bytes[(_scanLineLength / 3) + i]
+                  , bytes[(_scanLineLength / 3) * 2 + i]);
+               bitmap.SetPixel(i, j, color);
+            }
+         }
       }
    }
 }

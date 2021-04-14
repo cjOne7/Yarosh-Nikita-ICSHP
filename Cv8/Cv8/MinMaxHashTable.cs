@@ -8,7 +8,7 @@ namespace Cv8 {
       public K Min { get; set; }
       public K Max { get; set; }
       public int Count { get; set; }
-      private Node<K, V>[] Array { get; set; }
+      private Node<K, V>[] Array { get; }
 
       public MinMaxHashTable() {
          Array = new Node<K, V>[_initialSize];
