@@ -25,8 +25,8 @@
       /// </summary>
       private void InitializeComponent() {
          this.LoadImageBtn = new System.Windows.Forms.Button();
-         this.pictureBox1 = new System.Windows.Forms.PictureBox();
-         ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).BeginInit();
+         this.PCXImage = new System.Windows.Forms.PictureBox();
+         ((System.ComponentModel.ISupportInitialize) (this.PCXImage)).BeginInit();
          this.SuspendLayout();
          // 
          // LoadImageBtn
@@ -37,34 +37,34 @@
          this.LoadImageBtn.TabIndex = 0;
          this.LoadImageBtn.Text = "Load image";
          this.LoadImageBtn.UseVisualStyleBackColor = true;
+         this.LoadImageBtn.Click += new System.EventHandler(this.LoadImageBtn_Click);
          // 
-         // pictureBox1
+         // PCXImage
          // 
-         this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-         this.pictureBox1.Location = new System.Drawing.Point(0, 68);
-         this.pictureBox1.Name = "pictureBox1";
-         this.pictureBox1.Size = new System.Drawing.Size(554, 326);
-         this.pictureBox1.TabIndex = 1;
-         this.pictureBox1.TabStop = false;
+         this.PCXImage.Dock = System.Windows.Forms.DockStyle.Bottom;
+         this.PCXImage.Location = new System.Drawing.Point(0, 68);
+         this.PCXImage.Name = "PCXImage";
+         this.PCXImage.Size = new System.Drawing.Size(554, 326);
+         this.PCXImage.TabIndex = 1;
+         this.PCXImage.TabStop = false;
          // 
          // Form1
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(554, 394);
-         this.Controls.Add(this.pictureBox1);
+         this.Controls.Add(this.PCXImage);
          this.Controls.Add(this.LoadImageBtn);
          this.Name = "Form1";
          this.Text = "Read PCX image";
-         this.TopMost = true;
          this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-         ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).EndInit();
+         ((System.ComponentModel.ISupportInitialize) (this.PCXImage)).EndInit();
          this.ResumeLayout(false);
       }
 
-      private System.Windows.Forms.Button LoadImageBtn;
+      private System.Windows.Forms.PictureBox PCXImage;
 
-      private System.Windows.Forms.PictureBox pictureBox1;
+      private System.Windows.Forms.Button LoadImageBtn;
 
       #endregion
    }
