@@ -14,7 +14,7 @@ namespace Ping_Pong_Yarosh_v1 {
       private int _speedLeft = StartBallSpeed;
       private int _speedTop = StartBallSpeed;
       private int _points;
-      private List<Control> _initBlocks = new List<Control>();
+      private readonly List<Control> _initBlocks = new List<Control>();
 
       private readonly StartMenu _startMenu;
 
