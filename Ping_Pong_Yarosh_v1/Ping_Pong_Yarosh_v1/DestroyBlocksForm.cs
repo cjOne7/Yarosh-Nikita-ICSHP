@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -27,7 +26,7 @@ namespace Ping_Pong_Yarosh_v1 {
             }
          }
          Cursor.Hide();
-         // TopMost = true; //on top
+         TopMost = true; //on top
          Centralized(FinishLabel);
          Centralized(PauseLabel);
          Centralized(Ball);

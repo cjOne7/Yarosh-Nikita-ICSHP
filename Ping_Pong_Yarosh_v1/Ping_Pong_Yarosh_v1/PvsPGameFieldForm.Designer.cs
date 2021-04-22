@@ -51,7 +51,7 @@ namespace Ping_Pong_Yarosh_v1 {
          this.Playground.Dock = System.Windows.Forms.DockStyle.Fill;
          this.Playground.Location = new System.Drawing.Point(0, 0);
          this.Playground.Name = "Playground";
-         this.Playground.Size = new System.Drawing.Size(961, 585);
+         this.Playground.Size = new System.Drawing.Size(1030, 718);
          this.Playground.TabIndex = 0;
          this.Playground.MouseEnter += new System.EventHandler(this.Playground_MouseEnter);
          this.Playground.MouseLeave += new System.EventHandler(this.Playground_MouseLeave);
@@ -60,7 +60,7 @@ namespace Ping_Pong_Yarosh_v1 {
          // 
          this.Racket2.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
          this.Racket2.BackColor = System.Drawing.Color.White;
-         this.Racket2.Location = new System.Drawing.Point(249, 483);
+         this.Racket2.Location = new System.Drawing.Point(249, 616);
          this.Racket2.Name = "Racket2";
          this.Racket2.Size = new System.Drawing.Size(160, 27);
          this.Racket2.TabIndex = 6;
@@ -70,7 +70,7 @@ namespace Ping_Pong_Yarosh_v1 {
          // 
          this.Racket1.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
          this.Racket1.BackColor = System.Drawing.Color.White;
-         this.Racket1.Location = new System.Drawing.Point(68, 483);
+         this.Racket1.Location = new System.Drawing.Point(68, 616);
          this.Racket1.Name = "Racket1";
          this.Racket1.Size = new System.Drawing.Size(160, 27);
          this.Racket1.TabIndex = 1;
@@ -119,7 +119,7 @@ namespace Ping_Pong_Yarosh_v1 {
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(961, 585);
+         this.ClientSize = new System.Drawing.Size(1030, 718);
          this.Controls.Add(this.Playground);
          this.Name = "PvsPGameFieldForm";
          this.Text = "PvsPGameFieldForm";

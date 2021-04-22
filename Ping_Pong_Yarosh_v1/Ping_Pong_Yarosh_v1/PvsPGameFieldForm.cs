@@ -19,9 +19,7 @@ namespace Ping_Pong_Yarosh_v1 {
       private PvsPGameFieldForm() {
          InitializeComponent();
 
-         FormBorderStyle = FormBorderStyle.None;
          TopMost = true; //on top
-         Bounds = Screen.PrimaryScreen.Bounds; //full screen 
 
          Racket1.Top = Playground.Bottom - (Playground.Bottom / 20); //racket1 init pos
          Racket1.Left = (Playground.Width - Racket1.Width) / 2; //racket1 init pos
@@ -55,21 +53,22 @@ namespace Ping_Pong_Yarosh_v1 {
          timer.Start();
       }
 
-      //todo stop moving p2 after loosing
       private void KeyboardControl1_KeyDown(object sender, KeyEventArgs e) {
-         switch (e.KeyCode){
-            case Keys.A:
-               if (Racket1.Left >= Playground.Left){
-                  Racket1.Left -= _racketSpeed;
-               }
+         if (timer.Enabled){
+            switch (e.KeyCode){
+               case Keys.A:
+                  if (Racket1.Left >= Playground.Left){
+                     Racket1.Left -= _racketSpeed;
+                  }
 
-               break;
-            case Keys.D:
-               if (Racket1.Left <= Playground.Right - Racket1.Width){
-                  Racket1.Left += _racketSpeed;
-               }
+                  break;
+               case Keys.D:
+                  if (Racket1.Left <= Playground.Right - Racket1.Width){
+                     Racket1.Left += _racketSpeed;
+                  }
 
-               break;
+                  break;
+            }
          }
       }
 
@@ -92,14 +91,14 @@ namespace Ping_Pong_Yarosh_v1 {
 
       private void MouseControl_MouseMove(object sender, MouseEventArgs e) {
          if (timer.Enabled){
-            if (Cursor.Position.X - Racket2.Width / 2 <= Playground.Left){
+            if (Cursor.Position.X - Left - Racket2.Width / 2 <= Playground.Left){
                Racket2.Left = Playground.Left;
             }
-            else if (Cursor.Position.X + Racket2.Width / 2 >= Playground.Right){
+            else if (Cursor.Position.X - Left + Racket2.Width / 2 >= Playground.Right){
                Racket2.Left = Playground.Right - Racket2.Width;
             }
             else{
-               Racket2.Left = Cursor.Position.X - Racket2.Width / 2;
+               Racket2.Left = Cursor.Position.X - Left - Racket2.Width / 2;
             }
          }
       }
@@ -166,20 +165,18 @@ namespace Ping_Pong_Yarosh_v1 {
                PauseLabel.Visible = !PauseLabel.Visible;
                if (timer.Enabled){
                   Cursor.Hide();
-                  FormBorderStyle = FormBorderStyle.None;
                }
                else{
                   Cursor.Show();
-                  FormBorderStyle = FormBorderStyle.Sizable;
                }
 
                break;
             case Keys.F1:
+               Centralized(Ball);
                Ball.Top = Ball.Left = 100;
                _speedLeft = _speedTop = StartBallSpeed;
                FinishLabel.Visible = false;
                timer.Enabled = true;
-               Centralized(Ball);
                break;
             case Keys.F2:
                Close();
@@ -189,7 +186,7 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void Playground_MouseEnter(object sender, EventArgs e) {
-         Cursor.Hide();
+         // Cursor.Hide();
       }
 
       private void Playground_MouseLeave(object sender, EventArgs e) {

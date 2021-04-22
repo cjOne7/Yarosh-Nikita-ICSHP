@@ -1,1 +1,8 @@
-{"IsMouse":true,"IsKeyboard":false,"KeyboardControl":{"Left":"a","Right":"d"}}
+{
+    "IsMouse": false,
+    "IsKeyboard": true,
+    "KeyboardControl": {
+        "Left": "a",
+        "Right": "d"
+    }
+}
