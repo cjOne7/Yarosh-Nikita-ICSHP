@@ -173,7 +173,6 @@ namespace Ping_Pong_Yarosh_v1 {
                break;
             case Keys.F1:
                Centralized(Ball);
-               Ball.Top = Ball.Left = 100;
                _speedLeft = _speedTop = StartBallSpeed;
                FinishLabel.Visible = false;
                timer.Enabled = true;
@@ -186,7 +185,7 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void Playground_MouseEnter(object sender, EventArgs e) {
-         // Cursor.Hide();
+         Cursor.Hide();
       }
 
       private void Playground_MouseLeave(object sender, EventArgs e) {
