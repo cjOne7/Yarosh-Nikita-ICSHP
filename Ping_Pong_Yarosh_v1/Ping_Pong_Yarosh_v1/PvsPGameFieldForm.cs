@@ -201,6 +201,7 @@ namespace Ping_Pong_Yarosh_v1 {
 
       private void PvsPGameFieldForm_FormClosing(object sender, FormClosingEventArgs e) {
          SaveScore();
+         Cursor.Show();
          _startMenu.Show();
       }
 

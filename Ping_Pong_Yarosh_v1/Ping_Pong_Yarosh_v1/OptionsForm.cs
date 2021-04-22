@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Data;
 using System.IO;
+using System.Media;
 using System.Text.Json;
 using System.Windows.Forms;
 
 namespace Ping_Pong_Yarosh_v1 {
    public partial class OptionsForm : Form {
       private readonly Options _options;
+      private static readonly SoundPlayer Player = new SoundPlayer(Files.ClickSound);
+      
 
       public OptionsForm() {
          InitializeComponent();
@@ -27,6 +30,7 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void ConfirmBtn_Click(object sender, EventArgs e) {
+         Player.Play();
          const string mess = "Are you sure?";
          const string caption = "Changing control options";
          var result = MessageBox.Show(mess, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -42,14 +46,17 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void CancelBtn_Click(object sender, EventArgs e) {
+         Player.Play();
          Close();
       }
 
       private void MouseRadioBtn_CheckedChanged(object sender, EventArgs e) {
+         Player.Play();
          MovingLeftTextBox.Enabled = MovingRightTextBox.Enabled = false;
       }
 
       private void KeyboardRadioBtn_CheckedChanged(object sender, EventArgs e) {
+         Player.Play();
          MovingLeftTextBox.Enabled = MovingRightTextBox.Enabled = true;
       }
    }

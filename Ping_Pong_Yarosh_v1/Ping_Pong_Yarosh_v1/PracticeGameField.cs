@@ -150,6 +150,7 @@ namespace Ping_Pong_Yarosh_v1 {
 
       private void PracticeGameField_FormClosing(object sender, FormClosingEventArgs e) {
          SaveScore();
+         Cursor.Show();
          _startMenu.Show();
       }
 

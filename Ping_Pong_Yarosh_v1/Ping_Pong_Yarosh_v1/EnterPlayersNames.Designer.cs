@@ -118,6 +118,7 @@ namespace Ping_Pong_Yarosh_v1 {
          this.KeyboardMouseRadioBtn.TabStop = true;
          this.KeyboardMouseRadioBtn.Text = "AD + Mouse";
          this.KeyboardMouseRadioBtn.UseVisualStyleBackColor = true;
+         this.KeyboardMouseRadioBtn.CheckedChanged += new System.EventHandler(this.KeyboardMouseRadioBtn_CheckedChanged);
          // 
          // KeyboardKeyboardRadioBtn
          // 
@@ -129,6 +130,7 @@ namespace Ping_Pong_Yarosh_v1 {
          this.KeyboardKeyboardRadioBtn.TabIndex = 8;
          this.KeyboardKeyboardRadioBtn.Text = "AD + ← →";
          this.KeyboardKeyboardRadioBtn.UseVisualStyleBackColor = true;
+         this.KeyboardKeyboardRadioBtn.CheckedChanged += new System.EventHandler(this.KeyboardKeyboardRadioBtn_CheckedChanged);
          // 
          // label3
          // 

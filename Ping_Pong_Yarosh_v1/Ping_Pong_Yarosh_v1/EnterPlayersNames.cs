@@ -35,5 +35,13 @@ namespace Ping_Pong_Yarosh_v1 {
          Player.Play();
          Close();
       }
+
+      private void KeyboardMouseRadioBtn_CheckedChanged(object sender, EventArgs e) {
+         Player.Play();
+      }
+
+      private void KeyboardKeyboardRadioBtn_CheckedChanged(object sender, EventArgs e) {
+         Player.Play();
+      }
    }
 }
