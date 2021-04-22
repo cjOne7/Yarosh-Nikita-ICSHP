@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text.Json;
 using System.Windows.Forms;
 
@@ -15,6 +16,9 @@ namespace Ping_Pong_Yarosh_v1 {
 
       private readonly StartMenu _startMenu;
 
+      private static readonly SoundPlayer StartGamePlayer = new SoundPlayer(Files.StartGameSound);
+      private static readonly SoundPlayer PlatformTouchSoundPlayer = new SoundPlayer(Files.PlatformTouchSound);
+
       private PracticeGameField() {
          InitializeComponent();
          Cursor.Hide();
@@ -25,6 +29,7 @@ namespace Ping_Pong_Yarosh_v1 {
 
          Centralized(FinishLabel);
          Centralized(PauseLabel);
+         StartGamePlayer.Play();
       }
 
       public PracticeGameField(StartMenu startMenu) : this() {
@@ -74,8 +79,8 @@ namespace Ping_Pong_Yarosh_v1 {
          Ball.Left += _speedLeft;
          Ball.Top += _speedTop;
 
-         if (Ball.Bottom >= Racket.Top && Ball.Bottom <= Racket.Bottom
-                                       && Ball.Left >= Racket.Left && Ball.Right <= Racket.Right){
+         if (Ball.Bounds.IntersectsWith(Racket.Bounds)){
+            PlatformTouchSoundPlayer.Play();
             _speedTop++;
             _speedLeft++;
             _speedTop = -_speedTop;
@@ -84,10 +89,12 @@ namespace Ping_Pong_Yarosh_v1 {
          }
 
          if (Ball.Left <= Playground.Left || Ball.Right >= Playground.Right){
+            PlatformTouchSoundPlayer.Play();
             _speedLeft = -_speedLeft;
          }
 
          if (Ball.Top <= Playground.Top){
+            PlatformTouchSoundPlayer.Play();
             _speedTop = -_speedTop;
          }
 
@@ -118,9 +125,9 @@ namespace Ping_Pong_Yarosh_v1 {
                _speedLeft = _speedTop = StartBallSpeed;
                FinishLabel.Visible = false;
                _points = 0;
-               //todo add event to update it when value has been changed
                ScoreLabel.Text = @"Score: 0";
                timer.Enabled = true;
+               StartGamePlayer.Play();
                break;
             case Keys.F2:
                Close();

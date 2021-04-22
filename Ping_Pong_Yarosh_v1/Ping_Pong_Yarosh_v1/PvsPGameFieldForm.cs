@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Ping_Pong_Yarosh_v1 {
@@ -15,10 +16,13 @@ namespace Ping_Pong_Yarosh_v1 {
       private readonly string _playerName1;
       private readonly string _playerName2;
       private string _winner;
+      
+      private static readonly SoundPlayer StartGamePlayer = new SoundPlayer(Files.StartGameSound);
+      private static readonly SoundPlayer PlatformTouchSoundPlayer = new SoundPlayer(Files.PlatformTouchSound);
 
       private PvsPGameFieldForm() {
          InitializeComponent();
-
+         StartGamePlayer.Play();
          TopMost = true; //on top
 
          Racket1.Top = Playground.Bottom - (Playground.Bottom / 20); //racket1 init pos
@@ -108,23 +112,24 @@ namespace Ping_Pong_Yarosh_v1 {
          Ball.Top -= _speedTop;
 
          if (Ball.Left <= Playground.Left || Ball.Right >= Playground.Right){
+            PlatformTouchSoundPlayer.Play();
             _speedLeft = -_speedLeft;
          }
 
-         if (Ball.Top <= Racket2.Bottom && Ball.Top >= Racket2.Top
-                                        && Ball.Left >= Racket2.Left && Ball.Right <= Racket2.Right){
+         if (Ball.Bounds.IntersectsWith(Racket2.Bounds)){
+            PlatformTouchSoundPlayer.Play();
             _speedLeft = _speedLeft < 0 ? _speedLeft - 1 : _speedLeft + 1;
             _speedTop = _speedTop < 0 ? _speedTop - 1 : _speedTop + 1;
 
             _speedTop = -_speedTop;
          }
 
-         if (Ball.Bottom >= Racket1.Top && Ball.Bottom <= Racket1.Bottom
-                                        && Ball.Left >= Racket1.Left && Ball.Right <= Racket1.Right){
+         if (Ball.Bounds.IntersectsWith(Racket1.Bounds)){
+            PlatformTouchSoundPlayer.Play();
             _speedLeft = _speedLeft < 0 ? _speedLeft - 1 : _speedLeft + 1;
             _speedTop = _speedTop < 0 ? _speedTop - 1 : _speedTop + 1;
 
-            if (_controlType == ControlType.KeyboardMouse){ //boost
+            if (_controlType == ControlType.KeyboardMouse){ //boost keyboard player
                _racketSpeed += 5;
                Racket1.Width += 30;
             }
@@ -176,6 +181,8 @@ namespace Ping_Pong_Yarosh_v1 {
                _speedLeft = _speedTop = StartBallSpeed;
                FinishLabel.Visible = false;
                timer.Enabled = true;
+               StartGamePlayer.Play();
+               Racket1.Width = Racket2.Width;
                break;
             case Keys.F2:
                Close();

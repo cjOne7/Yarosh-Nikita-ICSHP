@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text.Json;
 using System.Windows.Forms;
 
@@ -16,6 +17,8 @@ namespace Ping_Pong_Yarosh_v1 {
       private readonly List<Control> _initBlocks = new List<Control>();
 
       private readonly StartMenu _startMenu;
+      private static readonly SoundPlayer StartGamePlayer = new SoundPlayer(Files.StartGameSound);
+      private static readonly SoundPlayer PlatformTouchSoundPlayer = new SoundPlayer(Files.PlatformTouchSound);
 
       private DestroyBlocksForm() {
          InitializeComponent();
@@ -25,12 +28,14 @@ namespace Ping_Pong_Yarosh_v1 {
                _initBlocks.Add(control);
             }
          }
+
          Cursor.Hide();
          TopMost = true; //on top
          Centralized(FinishLabel);
          Centralized(PauseLabel);
          Centralized(Ball);
          Racket.Top = Playground.Bottom - (Playground.Bottom / 10); //racket init pos
+         StartGamePlayer.Play();
       }
 
       public DestroyBlocksForm(StartMenu startMenu) : this() {
@@ -83,21 +88,25 @@ namespace Ping_Pong_Yarosh_v1 {
          Ball.Top += _speedTop;
 
          if (Ball.Bounds.IntersectsWith(Racket.Bounds)){
+            PlatformTouchSoundPlayer.Play();
             _speedTop = -_speedTop;
             ScoreLabel.Text = $@"Score: {_points}";
          }
 
          if (Ball.Left <= Playground.Left || Ball.Right >= Playground.Right){
+            PlatformTouchSoundPlayer.Play();
             _speedLeft = -_speedLeft;
          }
 
          if (Ball.Top <= Playground.Top){
+            PlatformTouchSoundPlayer.Play();
             _speedTop = -_speedTop;
          }
 
          foreach (Control control in Playground.Controls){
             if (control is PictureBox && (string) control.Tag == "blocks"){
                if (Ball.Bounds.IntersectsWith(control.Bounds)){
+                  PlatformTouchSoundPlayer.Play();
                   _points++;
                   _speedTop = -_speedTop;
                   Playground.Controls.Remove(control);

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Ping_Pong_Yarosh_v1 {
    public partial class EnterPlayersNames : Form {
       private readonly StartMenu _startMenu;
+      private static readonly SoundPlayer Player = new SoundPlayer(Files.ClickSound);
 
       private EnterPlayersNames() {
          InitializeComponent();
@@ -14,6 +16,7 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void ConfirmBtn_Click(object sender, EventArgs e) {
+         Player.Play();
          var playerName1 = PlayersName1.Text.Trim();
          var playerName2 = PlayersName2.Text.Trim();
          if (string.IsNullOrEmpty(playerName1) || string.IsNullOrEmpty(playerName2)){
@@ -29,6 +32,7 @@ namespace Ping_Pong_Yarosh_v1 {
       }
 
       private void CancelBtn_Click(object sender, EventArgs e) {
+         Player.Play();
          Close();
       }
    }
